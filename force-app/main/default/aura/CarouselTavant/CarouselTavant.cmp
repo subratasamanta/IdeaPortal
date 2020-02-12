@@ -1,0 +1,25 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <lightning:carousel disableAutoRefresh="false" disableAutoScroll="false">
+        <lightning:carouselImage
+                                 src ="{!$Resource.TavantCarousels +'/HomePageImages/TavantHome.png'}"
+                                 header = "TAVANT WARRANTY"
+                                 description = "The next generation warranty management solution with artificial intelligence and machine learning capabilities, leading to higher customer satisfaction and return on investment.
+                                                From streamlining warranty processes and efficiently managing claims to integrating business intelligence and predictive analytics for a holistic view, Tavant Warranty is an effective, scalable and dynamic warranty management solution for the entire warranty lifecycle of original equipment manufacturers."
+                                 alternativeText = "First card accessible description."/>
+        <lightning:carouselImage
+                                 src ="{!$Resource.TavantCarousels +'/HomePageImages/Aftermarket.jpg'}"
+                                 header = "AFTER MARKET"
+                                 description = "Tavant’s products and solutions are deployed globally by OEMs and leading players in the Aftermarket Industry for transforming their legacy systems into intelligent warranty systems. Our solutions provide actionable insights and help engage seamlessly with customers post-sale.
+                                                Our clients are able to maximize their ROI by controlling their warranty costs, reserves, and cash flow. Tavant’s aftermarket products enable a frequent and transparent communication, changing the way after-sale concerns are dealt with."
+                                 alternativeText = "Second card accessible description."
+                                 href = "https://www.salesforce.com"/>
+        <lightning:carouselImage
+                                 src ="{!$Resource.TavantCarousels +'/HomePageImages/TavantWCMBanner.png'}"
+                                 header = "WARRANTY CHAIN MANAGEMENT CONFERENCE"
+                                 description = "Tavant Warranty is the industry's leading analytics-based warranty management solution, helping organizations improve operational efficiency, productivity, speed and accuracy to succeed in a rapidly changing business environment. Our customized warranty solution with its artificial intelligence and machine learning capabilities, will help you increase Aftermarket revenues, calculate accurate warranty pricing - as well as manage claims and warranty reserves.
+                                                Meet our experts at WCM Conference to learn more - Booth # 5"
+                                 alternativeText = "Third card accessible description."
+                                 href = "http://info.tavant.com/wcm_2019"/>
+    </lightning:carousel>
+    
+</aura:component>

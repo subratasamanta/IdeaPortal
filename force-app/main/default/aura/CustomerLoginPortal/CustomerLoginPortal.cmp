@@ -1,0 +1,23 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <div class="slds-theme_shade" >
+        <div class="slds-align_absolute-center" style=" padding-top: 150px;">
+            <div class="slds-box slds-theme_default" style="height:600px; width:500px; ">  
+                <img class=" slds-m-around_x-large slds-align_absolute-center" src= "{!$Resource.TavantLogo}" style="width: 225px;"/>
+                <div class="form-group">
+                    <header class="sldsheader">
+                        <div class="sign-in-heading" style="font-size:30px; margin-left: 30px;"> Sign In </div>
+                    </header> 
+                    <lightning:input class="labelEmail" type="email" name="Email" required="true"  label="Email Address" />
+                    <lightning:input class="labelPass" type="password" label="Password" name="Password" required="true"  /><br/>
+                    <lightning:button class="buttonSignIn" variant="brand" label="Sign In" title="SignIn" onclick="{!c.SignIn }" />
+                    <lightning:button class="buttonSignUp" variant="Neutral" label="Create Account" title="SignUp" onclick="{!c.SignUp }" />
+                    <div>
+                        <a href="" class="slds-align_absolute-center" style="text-decoration:none;font-size: 15px;margin-left: -19px;">Forgot Password</a>
+                    </div> 
+                </div>
+            </div>  
+            
+        </div>
+    </div>  
+    
+</aura:component>

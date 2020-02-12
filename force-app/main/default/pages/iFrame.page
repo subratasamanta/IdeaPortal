@@ -1,0 +1,5 @@
+<apex:page showHeader="false">
+    <apex:pageBlock >
+        <apex:iframe src="https://www.tavant.com/news" scrolling="true" id="theIframe"/> 
+    </apex:pageBlock>
+</apex:page>

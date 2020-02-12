@@ -1,0 +1,234 @@
+<aura:component  controller="IdeaController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="objDetail" type="Idea__c" default="{'sobjectType' : 'Idea__c'}"/>
+    <!-- <aura:attribute name="controllingField" type="string" default="Ideas__c" description="store field API name of Controller field"/>
+    <aura:attribute name="dependingField" type="string" default="SubIdeas__c" description="store field API name of dependent field"/> -->
+    <aura:attribute name="status" type="String" default="Status__c" access="global"/>
+    
+   <!-- <aura:attribute name="ControllingpickListOptions" type="list" default="[]" description="to store controller field values"/>
+    <aura:attribute name="DependingpickListOptions" type="list" default="['Select']" description="to store dependent field values"/>
+    <aura:attribute name="depnedentFieldMap" type="map" description="map to store dependent values with controlling value"/>
+    <aura:attribute name="bDisabledDependentFld" type="boolean" default="true"/> -->
+    
+    <aura:attribute name="pickListOptions" type="String[]" default="Submitted"/>
+    <aura:attribute name="backgroundImageURL" type="String" />
+    <aura:attribute name="selectedSubIdea" type="String" />
+    <aura:attribute name="selectedMainIdea" type="String" />
+    <aura:attribute name="ideaList" type="Idea__c[]"/>
+    <aura:attribute name="wrapPaginationList" type="IdeaController.WrapIdeasWithComments[]"/>
+    <aura:attribute name="wrapIdea" type="IdeaController.WrapIdeasWithComments[]"/>   
+    <aura:attribute name="mapcountValues" type="object[]" />
+   <!-- <aura:attribute name="accordianItems" type="object[]"/>-->
+    
+    <aura:attribute name="selectedStatusValue" type="String" />
+    <aura:attribute name="selectedValue" type="string" default="All Ideas"/>
+    
+    <aura:attribute name="currentPageNumber" type="integer" default="1"/>
+    <aura:attribute name="TotalPages" type="integer" default="0"/>
+    <aura:attribute name="TotalRecords" type="integer" default="0"/>
+    <aura:attribute name="RecordStart" type="integer" default="0"/>
+    <aura:attribute name="RecordEnd" type="integer" default="0"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"/>
+    
+    
+    <aura:attribute name="isOpenModal" type="boolean" />
+  <!--  <aura:attribute name="isBoolErrorMessage" type="Boolean" default="" />-->
+   <!-- <aura:attribute name="disableButton" type="Boolean" default="true" />-->
+      
+    <aura:attribute name="isNoIdeas" type="Boolean" default="false" />
+    <aura:attribute name="isAllIdeas" type="Boolean" default="true" />
+    <aura:attribute name="SubscriberId" type="Id" />
+    <aura:attribute name="idStringMap" type="Map" />
+  
+ <!--   <aura:attribute name='IdeaDetails' Type='Idea__c'  default="{'sobjectType': 'Idea__c',
+                                                                'Name': '',
+                                                                'Idea_Description__c': ' ',
+                                                                'Ideas__c':'',
+                                                                'SubIdeas__c':'',
+                                                                'Status__c':'Submitted'
+                                                                }"/> -->   
+   <!-- <aura:attribute name='Comments' Type='Comment__c'  default="{'sobjectType': 'Comment__c',
+                                                                'CommentBody__c': '',
+                                                                'UpVotes__c': ' ',
+                                                                'Idea__c':''
+                                                                }"/> -->   
+    <aura:attribute name="onloadSpinner" type="boolean" default="false"/>
+    <!--<aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+   
+    
+    <!--loading spinner start-->
+    <!--
+    <div class="slds-spinner_container">
+        <div role="status" class="slds-spinner slds-spinner_large slds-spinner_brand">
+            <span class="slds-assistive-text">Loading..........</span>
+      		<div class="slds-spinner__dot-a"></div>
+      		<div class="slds-spinner__dot-b"></div>
+        </div>
+    </div>
+	-->
+    
+    <div class="exampleHolder">
+        <lightning:spinner aura:id="mySpinner" class="slds-hide" variant="brand" size="large" alternative-text="Loading"/>
+    </div>
+    <!-- Loading spinner end-->
+    
+    <div class="slds-p-horizontal_xx-large " style="{!'background:' + v.backgroundColor + ' url('+ v.backgroundImageURL +') repeat;background-position: center;'}">
+        <lightning:layout >
+            <!--<lightning:layoutItem size="2" flexibility="shrink"/> -->
+            <lightning:layoutItem size="12" flexibility="shrink">
+                <div class="slds-grid slds-gutters" >
+                    <div class="slds-col slds-size_12-of-12 slds-m-left_x-small" > 
+                        <img class="slds-m-around_small" src="{!$Resource.IdeaImages }"  href = "" height="3000" width="3000" style="border-radius:25px;"/>
+                    </div></div>
+            </lightning:layoutItem>
+            <!-- <lightning:layoutItem size="2" flexibility="shrink"/>-->
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem size="2" flexibility="shrink"/>  
+            
+            <lightning:layoutItem size="9" flexibility="shrink">
+                <div class="slds-grid ">
+                    <div class="slds-col slds-size_1-of-8 slds-m-around_xxx-small"></div>
+                    <div class="slds-col slds-size_2-of-8 slds-m-around_xxx-small">
+                        <ui:inputSelect class="sortPicklist" aura:id="Status"  change="{!c.showSortIdeas}" label="Sort" value="{!v.selectedValue}">
+                            <option value="{!$Label.c.All_Ideas}" >{!$Label.c.All_Ideas}</option>
+                            <option value="{!$Label.c.Popular}" >{!$Label.c.Popular}</option>
+                            <option value="{!$Label.c.Recent}" >{!$Label.c.Recent}</option>
+                            <option value="{!$Label.c.My_Ideas}" >{!$Label.c.My_Ideas}</option>
+                        </ui:inputSelect>
+                    </div>
+                    <div class="slds-col slds-size_3-of-8 slds-m-around_xxx-small"  >
+                        <ui:inputSelect class="statusPicklist" aura:id="ideaStatus" label="Idea Status" change="{!c.handleOnChange}" >
+                            <aura:iteration items="{!v.pickListOptions }" var="option" >
+                                <option text="{!option.Label}" value="{!option.id}" >{!option.value}</option>
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                    <div class="slds-col slds-size_1-of-8 slds-m-around_xxx-small " >
+                        <!--<lightning:button class="buttonPostIdea" variant="brand" label="Post an Idea" iconName="utility:light_bulb" aura:id="Popular-Ideas" onclick="{!c.openModal}" />-->
+                        <c:CreateIdea />
+                    </div>
+                    <div class="slds-col slds-size_1-of-8 slds-m-around_xxx-small " ></div>
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="2" flexibility="shrink"/>  
+        </lightning:layout>
+        <div class="slds-p-top_large"></div>
+        <lightning:layout >
+            <!--  <lightning:layoutItem size="1" flexibility="shrink"/> --> 
+            <lightning:layoutItem size="2" class="classAccord" flexibility="shrink"> 
+                <lightning:verticalNavigation selectedItem="All Ideas" >
+                    <lightning:verticalNavigationSection label="" >
+                        <lightning:verticalNavigationItem style="border-bottom: 1px solid #ccc;" aura:id="all" onclick="{!c.showSortIdeas}" label="All Ideas" name="All Ideas" />
+                        <lightning:verticalNavigationItem style="border-bottom: 1px solid #ccc;" aura:id="recent" onclick="{!c.showSortIdeas}" label="Recent" name="Recent" />
+                    </lightning:verticalNavigationSection>
+                </lightning:verticalNavigation>
+                <lightning:verticalNavigation selectedItem="{!v.selectedIdea}" >
+                    <ul class="slds-list--vertical slds-has-block-links--space">
+                        <aura:iteration items="{!v.mapcountValues}" var="count" indexVar="index">
+                            <li class="slds-list__item">
+                                <div class="slds-text-body_regular">
+                                    <p onclick="{!c.handleMainIdeas}" data-selected-Index="{!index}" class="slds-m-around_medium selectedIdea"  data-value="{!count.Label}" >{!count.Label}</p>
+                                </div>
+                            </li>
+                            <aura:if isTrue="{!count.showSubIdeas}">
+                                <aura:iteration items="{!count.childs}" var="childs">
+                                    <ul class="slds-list--vertical slds-is-nested">
+                                        <li class="slds-list__item">
+                                            <p onclick="{!c.bringResults}" class="slds-m-around_medium selected" data-value="{!childs}">{!childs}{!count.label}</p>
+                                        </li>
+                                    </ul>
+                                </aura:iteration>
+                            </aura:if>
+                        </aura:iteration>
+                    </ul>                                         
+                </lightning:verticalNavigation>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="9" class="ideaList" flexibility="shrink ">
+                
+                <aura:if isTrue="{!v.isAllIdeas}">
+                    <aura:iteration items="{!v.wrapPaginationList}" var="idea" indexVar="index">
+                        <lightning:card title="{!idea.objIdeaRecord.Name}" class="overDiv">
+                            <aura:set attribute="title">
+                                <h1><b><a onclick="{!c.openDetailPage}" style="color:#556a8c;" class="slds-text-heading_small" id="{!index}"> {!idea.objIdeaRecord.Name} </a></b></h1>
+                            </aura:set>
+                            <div>
+                                <aura:if isTrue="{!idea.objIdeaRecord.CreatedBy.Id != v.SubscriberId}">
+                            		 <c:subscriptionComp targetObjectId="{!idea.objIdeaRecord.Id}" buttonLabel="{!idea.subscribeString}"/>
+                            	</aura:if>
+                            </div>          
+                            
+                            <div class="slds-grid slds-p-left_large slds-gutters" >
+                                <div class="slds-col slds-size_7-of-12" > 
+                                    <aura:if isTrue="{!idea.objIdeaRecord.Idea_Description__c!=null}">
+                                        <lightning:formattedRichText value="{!idea.objIdeaRecord.Idea_Description__c}" class="slds-has-flexi-truncate"/>  
+                                        <aura:set attribute="else">
+                                            <span class="slds-p-left_xx-small">{!$Label.c.No_Description}</span><br/>
+                                        </aura:set>
+                                    </aura:if>
+                                    <br/>
+                                    <div tabindex="{!index}" class="slds-m-top_xx-large">
+                                        <a href="javascript:void(0);" id="{!index}" onclick="{!c.openComments}">{!idea.commentsCount} Comments.</a>
+                                        <span class="slds-p-left_x-small">{!$Label.c.Posted_on} : </span> <ui:outputDate class=" date" value="{!idea.objIdeaRecord.CreatedDate}"/>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_5-of-12 slds-border_left" >
+                                    <div clas="slds-align_absolute-center">
+                                        
+                                        <div class="slds-grid slds-gutters slds-p-left_medium  " > 
+                                            <div class="slds-col slds-size_3-of-5 ">
+                                                <span class="slds-align_absolute-center">
+                                                    <c:VoteComponent ideaRecordId="{!idea.objIdeaRecord.Id}" ideaRecord="{!idea.objIdeaRecord}" />
+                                                </span>
+                                                <aura:if isTrue="{!idea.objIdeaRecord.Status__c}" >
+                                                    <!-- <p  class="slds-badge">{!idea.objIdeaRecord.Status__c}</p>-->
+                                                    <p class="slds-badge slds-m-around-large slds-align_absolute-center width:20%; fill:grey; "> 
+                                                        {!idea.objIdeaRecord.Status__c}
+                                                    </p>
+                                                </aura:if>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-5">
+                                                
+                                                 <aura:if isTrue="{!idea.objIdeaRecord.CreatedBy.SmallPhotoUrl}" >
+                                                     <lightning:avatar variant="circle"  src="{!idea.objIdeaRecord.CreatedBy.SmallPhotoUrl}"
+                                                                      alternativeText="{!idea.objIdeaRecord.CreatedBy.Name}" size="edium"/>
+                                                     <aura:set attribute="else">	
+                                                         <lightning:avatar variant="circle" class="slds-avatar slds-avatar_profile-image-medium" 
+                                                                  alternativeText="{!idea.objIdeaRecord.CreatedBy.Name}" size="medium"/>
+                                                     </aura:set>
+                                                    
+                                                </aura:if>
+                                                <div class="slds-p-right_xxx-small"> <a><lightning:formattedText value="{!idea.objIdeaRecord.CreatedBy.Name}"/></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></div>
+                        </lightning:card>
+                    </aura:iteration>
+                </aura:if>
+                <!--alert message  on  business ,sub-business function && Status if(idealength==0)  starts here-->
+                <aura:if isTrue="{!v.isNoIdeas}">
+                    <div class="slds-modal__content slds-notify slds-notify--alert slds-theme--inverse slds-p-around-small" id="modal-content-id-1"  >
+                        <p  class="slds-text-color_inverse slds-text-align_center">{!$Label.c.No_Ideas_Found}</p>
+                    </div>
+                    <div class="slds-modal__footer slds-theme--default">
+                      <lightning:button variant="neutral" label="OK" onclick="{!c.okNoidea}"/>
+                    </div>
+                </aura:if>
+                <!--alert message ends here -->
+            </lightning:layoutItem>
+            <!--<lightning:layoutItem size="2" flexibility="shrink"/> -->
+        </lightning:layout>
+        
+        <!-- Pagination Starts here-->
+        <span class="slds-clearfix "> 
+            <div class="slds-float_right slds-m-around_medium">
+                <lightning:button disabled="{!v.currentPageNumber == 1}" iconName="utility:chevronleft" iconPosition="left"  aura:id="prevPage" label="Prev" onclick="{!c.handlePrev}" /> 
+                <lightning:button disabled="{!v.currentPageNumber == v.TotalPages}" aura:id="nextPage" iconName="utility:chevronright" iconPosition="right"  label="Next" onclick="{!c.handleNext}"/>
+            </div>
+            <div  style ="margin-top:25px;" class="slds-page-title slds-m-top_x-medium">{!v.RecordStart} to {!((v.TotalRecords) >= (v.RecordEnd) ? (v.RecordEnd) : (v.TotalRecords))} of {!v.TotalRecords} | Page {!v.currentPageNumber}  of {!v.TotalPages} Pages</div>
+        </span> 
+        <!-- Pagination Ends here-->
+    </div>
+</aura:component>

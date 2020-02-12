@@ -1,0 +1,292 @@
+<apex:page >
+
+<head>
+<style type="text/css">
+h1 {font-size:25px; face:arial; color:orange; font-weight:bold}
+h2 {font-size:16px; face:arial; color:purple; font-weight:bold}
+a {font-size:12px; face:arial; color:blue}
+</style>
+</head>
+
+
+<p> </p>
+<img src="https://www.tavant.com/common/images/logo.gif" alt="Tavant Technologies" align="right"/>
+<h1>Tavant Management Reports</h1>
+<p>  </p>
+
+
+<table border="1" width="100%" cellpadding="10">
+   <col width="100" />
+   <col width="50" />
+
+<tr>
+<td>
+
+<!--Start Section 1 top row left column -->
+<h2>Sales Management Reports</h2>
+<table cellpadding="10">
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002utr3" target="_blank">YTD SALES FORECAST BY ACCOUNT</a></td>
+<td>Quarterly report with critical forecasting data for Hassan.</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002v6qG" target="_blank">YTD SALES FORECAST BY RSD/CP</a></td>
+<td>Quarterly report with critical forecasting data for Hassan.</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002uthN" target="_blank">Quarterly Billings Key Metrics Report</a></td>
+<td>Exec Management report with key summarized metrics</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vAXn" target="_blank">Monthly Booking Details</a></td>
+<td>Shows all opportunities to be booked in 2012 by month.  opportunities with "past" months not closed should be adjusted.</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vCHx" target="_blank">Account funnel, pipeline of accounts by priority</a></td>
+<td>Account level activity for piroirty accounts (0, 1, 2, 3) </td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vTls" target="_blank">Priority Account Activity Report </a></td>
+<td>Account level activity for piroirty accounts (0, 1, 2, 3) </td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vUGB" target="_blank">All Leads All Practices Inside Sales Activity Report </a></td>
+<td>Inside Sales Lead Activity Report (from Lal) </td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vSy4" target="_blank">Practice Billing Quota Summary </a></td>
+<td>Summary by vertical practice of Forecast and Expected billing by Quarter</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vTkk" target="_blank">Billing Detail by Lead Source</a></td>
+<td>Summary by Billing detail by Lead Source</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002up2a" target="_blank">Billing Detail Month by Month- UNDER DEVELOPMENT!</a></td>
+<td>This report is still UNDER DEVELOPMENT - the data still needs to be validated 3/29/12</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000003qB4e" target="_blank">2014 Likely Billings</a></td>
+<td>2014 Likely Billings</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000003qB4j" target="_blank">2014 Likely Bookings</a></td>
+<td>2014 Likely Bookings</td>
+</tr>
+
+
+
+
+
+
+</table>
+</td>  
+<td>
+
+<!--Start Section 2 top row right column-->
+<h2>Sales Management Dashboards</h2>
+<table cellpadding="10">
+<!--Start of rows with defined Reports-->
+
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000LuIM" target="_blank">2015 Billings Dashboard</a></td>
+<td>2015 Billings Dashboard</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000LvJB" target="_blank">2015 Bookings Dashboard</a></td>
+<td>2015 Bookings Dashboard</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000LvJ6" target="_blank">2015 Vertical Practice Billing Dashboard</a></td>
+<td>2015 Vertical Practice Billing Dashboard</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000Lw9H" target="_blank">2015 Horizontal Practice Billings Dashboard</a></td>
+<td>2015 Horizontal Practice Billings Dashboard</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000j2UL" target="_blank">2014 Bookings Dashboard</a></td>
+<td>2014 Bookings Dashboard</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000j0ku" target="_blank">2014 Billings Dashboard</a></td>
+<td>2014 Billings Dashboard</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000j2KB" target="_blank">2014 Vertical Practice Billings Dashboard</a></td>
+<td>2014 Vertical Practice Billings Dashboard</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000j2XU" target="_blank">2014 Sales Performance Dashboard</a></td>
+<td>2014 Sales Performance Dashboard</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000iS9Z" target="_blank">Corporate Billings Dashboard</a></td>
+<td>Description of this Dashboard</td>
+</tr>
+
+<!--
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000iZ8G" target="_blank">2013 Corporate Billings Dashboard</a></td>
+<td>New Dashboard for 2013 billings reporting.</td>
+</tr>
+-->
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000j0ku" target="_blank">2014 Corporate Billings Dashboard</a></td>
+<td>New Dashboard for 2014 billings reporting.</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000iSQt" target="_blank">Corporate Bookings Dashboard</a></td>
+<td>Summary of bookings against RSD/CP Quotas</td>
+</tr>
+<!--
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000iZUg" target="_blank">2013 Corporate Bookings Dashboard</a></td>
+<td>Summary of bookings against RSD/CP Quotas</td>
+</tr>
+-->
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000iSBu" target="_blank">Sales Performance Dashboard</a></td>
+<td>This includes a measure for each RSD/CP against thier goals.  The Yellow means you have achieved your Quota.  The Green represents achiving your multiplier.</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000iUpc" target="_blank">Practice Performance Dashboard</a></td>
+<td>Practice Performance Dashboards</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000iUoe" target="_blank">Practice Billing Dashboard</a></td>
+<td>Practice Billing Dashboards</td>
+</tr>
+
+</table>
+</td>
+</tr>
+
+
+<!--Start of Section 3 bottom row left column-->
+<tr>
+<td>
+<h2>Audit Reports</h2>
+<table cellpadding="10">
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vClG" target="_blank">Bookings Missed Close Date</a></td>
+<td>This report shows opportunities with close dates in the past.  These close dates need to be adjusted</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002v7xH" target="_blank">Open with Expected</a></td>
+<td>This report shows all NOT closed opportunities that have a value for Expected.  Only closed opportunities should have values in Expected and may have values in Actual.</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002v7tt" target="_blank">Closed Missing Expected</a></td>
+<td>This report shows closed opportunities that do not have an Expected amount. Red Cells should be reviewed.</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vJ4l" target="_blank">Billing Before Close</a></td>
+<td>This report shows closed opportunities that have billing records/dates prior to the opportunity close date. The billing record dates need to be pushed to after the close date.</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002v8LZ" target="_blank">RSD/CP Sales Quota Dump</a></td>
+<td>This report simply shows the Quotas for each of the Sales people, both RSD and CP</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002wum1" target="_blank">2013 RSD/CP Sales Quota Dump</a></td>
+<td>This report simply shows the Quotas for each of the Sales people, both RSD and CP</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002v643" target="_blank">Vertical Practice Quota Dump</a></td>
+<td>This report simply shows the Quotas for the vertical practices</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002x13N" target="_blank">2013 Vertical Practice Quota Dump</a></td>
+<td>This report simply shows the Quotas for each of the Sales people, both RSD and CP</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vTit" target="_blank">Opportunities Missing Lead Source</a></td>
+<td>These are closed opportunities who need to have Lead Source and Campaign filled in.</td>
+</tr>
+
+
+</table>
+</td>
+<td>
+
+<!--Start of Section 4 bottom row right column-->
+<h2>Change Identification Reports and Dashboards</h2>
+<table cellpadding="10">
+<!--Start of rows with defined Reports-->
+<tr>
+<td><a href="https://na3.salesforce.com/01Z50000000iTT2" target="_blank">Change Tracking Dashboard</a></td>
+<td>This Dashboard provides a quick view of key changes by sales person.  From the snapshot data.</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002v6SL" target="_blank">Snapshot Change reports</a></td>
+<td>This report shows changes in Forecast, Expected, ACtual and Probability Changes over time</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002v9gD" target="_blank">Downgraded Opportunities</a></td>
+<td>Opportunities that have been downgraded, moved down/backwards in sales stage.</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002v9hG" target="_blank">Opportunity Field changes in last 7 days</a></td>
+<td>Shows key field changes in the last 7 days for all opportunities.</td>
+</tr>
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002uq86" target="_blank">Opportunity Aging Report</a></td>
+<td>This report shows how long each opportunity has been in which stage.</td>
+</tr>
+
+
+</table>
+</td>
+</tr> 
+<!--Start of Section 5 bottom row left column-->
+<tr>
+<td>
+<h2>Administrative Reports</h2>
+<table cellpadding="10">
+<tr>
+<td><a href="https://na3.salesforce.com/00O50000002vEDb" target="_blank">Active Users report</a></td>
+<td>All active licensed users and Chatter users; shows, role and when they last logged in.</td>
+</tr>
+
+</table>
+</td>
+<td>
+
+<!--Start of Section 6 bottom row right column-->
+<h2>Training Materials</h2>
+<table cellpadding="10">
+<!--Start of rows with defined Reports-->
+<tr>
+<td><a href="https://na3.salesforce.com/01550000000azW9" target="_blank">Salesforce 101 for Tavant Training Document</a></td>
+<td>Presentation about Forecast Category</td>
+</tr>
+
+<tr>
+<td><a href="https://na3.salesforce.com/01550000000juMo" target="_blank">What is Forecast Category?</a></td>
+<td>Presentation about Forecast Category</td>
+</tr>
+
+
+</table>
+</td>
+</tr>    
+   
+</table>
+
+</apex:page>

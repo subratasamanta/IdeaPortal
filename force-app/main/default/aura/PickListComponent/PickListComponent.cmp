@@ -1,0 +1,30 @@
+<aura:component controller="CommonPicklistController">
+	
+    <aura:attribute name="fieldApiName" type="String"  />
+    <aura:attribute name="objectName" type="String"  />
+    <aura:attribute name="fieldName" type="String"  />
+     <aura:attribute name="selectedValue" type="String"  />
+     <aura:attribute name="disabled" type="boolean" default="false" />
+    <aura:attribute name="required" type="boolean" default="true" />
+    <aura:attribute name="isHiddenLabel" type="boolean" default="false" />
+     <aura:attribute name="nullrequired" type="boolean" default="true" />
+    <aura:attribute name="items" type="object[]" default="[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    
+   <aura:if isTrue="{!v.isHiddenLabel}">
+        <select name="select1" label="{!v.fieldName}" required="{!v.required}"  disabled="{!v.disabled}" value="{!v.selectedValue}" class="slds-select"  onchange="{!c.setSelectedValue}">
+            <aura:iteration items="{!v.items}" var="item">
+                <option value="{!item.value}" label="{!item.label}" selected="{!if(item.label == v.selectedValue ,'selected','')}">{!item.label}</option>
+            </aura:iteration>
+        </select>
+        <aura:Set attribute="else">
+            <lightning:select name="select1" label="{!v.fieldName}" required="{!v.required}" value="{!v.selectedValue}"  disabled="{!v.disabled}">
+                <aura:iteration items="{!v.items}" var="item">
+                    <option value="{!item.value}" label="{!item.label}" selected="{!if(item.label == v.selectedValue ,'selected','')}" >{!item.label}</option>
+                </aura:iteration>
+            </lightning:select>
+        </aura:Set>
+    </aura:if>
+  
+</aura:component>

@@ -1,0 +1,11 @@
+<template>       
+    <lightning-card title='File Upload'  icon-name="standard:relationship">
+        <lightning-file-upload
+                name="fileUploader"
+                accept={acceptedFormats}
+                record-id={recordId}
+                onuploadfinished={handleUploadFinished}
+                multiple>
+            </lightning-file-upload>
+    </lightning-card>
+    </template>

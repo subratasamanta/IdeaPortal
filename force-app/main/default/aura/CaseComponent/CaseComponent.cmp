@@ -1,0 +1,141 @@
+<aura:component controller="CaseController" access="global" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable">
+    <aura:attribute name="backgroundImageURL" type="String" />
+    <aura:attribute name="showSubmit" type="boolean" default="false"/>
+    <aura:attribute name="showLoader" type="boolean" default="false"/>
+    <aura:attribute name="disabled" type="boolean" default="false" />
+    <aura:attribute name="wrapCase" type="CaseController.caseWrapper" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="headerLabel" type="String" default="Create" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+        <aura:set attribute="else">
+            <div class="slds-p-horizontal_xx-large" style="{!'background:' + v.backgroundColor + ' url(' + v.backgroundImageURL +') repeat;background-position: center;'}">
+                <h1 class="slds-text-align_center slds-text-heading_medium"><b>{!v.headerLabel} {!$Label.c.License_Request}</b></h1>
+                <lightning:layout>
+                    <lightning:layoutItem size="6">  
+                        <lightning:input name="input1" label="Subject" disabled="{!v.disabled}"  aura:id="input1" placeholder="{!$Label.c.Enter_Subject}" maxlength="60" required="true" value="{!v.wrapCase.caseobj.Subject}"/>
+                    </lightning:layoutItem> 
+                    <lightning:layoutItem size="6" class="slds-p-left_x-small">  
+                        <lightning:input name="input1" label="Salesforce Org Id"  disabled="{!v.disabled}"  placeholder="Enter your Org Id" maxlength="60" required="true" value="{!v.wrapCase.caseobj.Salesforce_Org_Id__c}"/>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout>
+                    <lightning:layoutItem size="6"> 
+                        <c:PickListComponent fieldApiName="Status" objectName="Case"  disabled="true"  required="true" nullrequired="false" fieldName="Status" selectedValue="{!v.wrapCase.caseobj.Status}" ></c:PickListComponent>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="6" class="slds-p-left_x-small"> 
+                        <c:PickListComponent fieldApiName="Priority" objectName="Case" disabled="{!v.disabled}"  required="false" fieldName="Priority"  selectedValue="{!v.wrapCase.caseobj.Priority}" ></c:PickListComponent>
+                    </lightning:layoutItem>
+                </lightning:layout>
+               
+                <lightning:layout>
+                    <lightning:layoutItem size="6"> 
+                        <lightning:textarea name="input2" label="Comments" value="{!v.wrapCase.caseobj.Comments__c}" disabled="{!v.disabled}" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+				
+                <lightning:layout >
+                    <lightning:layoutItem size="12" class="slds-p-top_x-small"> 
+                        <!-- <c:DynamicRow caseList="{!v.wrapCase.caseLineItem}"/> -->
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th scope="col">
+                                        <div class="slds-truncate">{!$Label.c.S_No}</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate slds-p-left_small" title="Licence Type">{!$Label.c.Licence_Type}</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate slds-p-left_small" title="No. of Licence">{!$Label.c.Total_Licence}</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate slds-p-left_small" title="Action">{!$Label.c.Effective_Date}</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate slds-p-left_small" title="Action">{!$Label.c.Action}</div>
+                                    </th>
+                                </tr>
+                            </thead>   
+                            <tbody>
+                               <!--Iterate the child Component for display Table rows 
+                                   with pass the List Item Index for track the Every child Component 
+                                   and pass each List Contact Instance  -->        
+                                
+                                <aura:iteration items="{!v.wrapCase.caseLineItem}" var="item" indexVar="ind">
+                                    <tr class="slds-text-title_caps" >
+                                        <td> 
+                                            {!ind + 1}
+                                        </td>
+                                        <td> 
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="form-element-01"></label>
+                                                <c:PickListComponent fieldApiName="Licence_Name__c" disabled="{!v.disabled}"  objectName="Case_Line_Item__c" required="false" isHiddenLabel="true" selectedValue="{!item.Licence_Name__c}" ></c:PickListComponent>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="form-element-01"></label>
+                                                <ui:inputNumber  value="{!item.Quantity__c}" disabled="{!v.disabled}" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-form-element">
+                                                <ui:inputDate aura:id="expdate"   value="{!item.Effective_Date__c}" disabled="{!v.disabled}"   displayDatePicker="true" /> 
+                                             </div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="form-element-01"></label>
+                                                <c:PickListComponent fieldApiName="Action__c" objectName="Case_Line_Item__c" required="false" disabled="{!v.disabled}"  isHiddenLabel="true" selectedValue="{!item.Action__c}" ></c:PickListComponent>
+                                            </div>
+                                        </td>
+                                       
+                                        <td>
+                                            <!-- conditionally Display Add or Delete Icons
+                                                 if rowIndex is 0 then show Add New Row Icon else show delete Icon
+                                             --> 
+                                            <aura:if isTrue="{!ind == 0}">
+                                                <a onclick="{!c.AddNewRow}">
+                                                  <lightning:buttonicon iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="add"/>
+                                                  <span class="slds-assistive-text">Add Icon</span>
+                                                </a>    
+                                              <aura:set attribute="else">
+                                                  <a onclick="{!c.removeRow}" data-index="{!ind + 1}" >
+                                                   <lightning:buttonicon variant="error" iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="icon"/>
+                                                   <span class="slds-assistive-text" >Delete Icon</span>
+                                                  </a>
+                                              </aura:set> 
+                                            </aura:if>
+                                        </td>                                         
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                        <br/>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout >
+                    <lightning:layoutItem size="10"/>  
+                    <lightning:layoutItem size="2">
+                         <lightning:button variant="brand" label="Back" onclick="{!c.cancel}"   />
+                        <aura:if isTrue="{!not(v.showSubmit)}">
+                            <lightning:button variant="brand" label="Save" onclick="{! c.SaveCase }" disabled="{!v.disabled}"  />
+                        </aura:if>
+                        <aura:if isTrue="{!v.showSubmit}">
+                            <lightning:button variant="brand" label="Save and Submit" onclick="{! c.submitCase }" />
+                        </aura:if>
+                       
+                    </lightning:layoutItem>
+                </lightning:layout> 
+                <div>
+                    <br/>
+                </div>
+                <aura:if isTrue="{!v.showLoader}">
+                    <lightning:spinner alternativeText="Loading" size="medium" />
+                </aura:if>
+            </div>
+        </aura:set>
+      </aura:if> 
+</aura:component>

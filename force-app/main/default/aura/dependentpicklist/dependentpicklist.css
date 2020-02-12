@@ -1,0 +1,47 @@
+.THIS .errorStyle{
+    border-color: darkred;
+    border-width: 2px;
+}
+.THIS .buttonStyle{
+    margin-right:5px;
+}
+.THIS .postClass{
+    float: right;
+}
+.THIS .select-auto-width{
+    width:fit-content;
+}
+.THIS .postIdea{
+    padding-right: 90px;
+}
+.THIS .emptyBox{
+    padding-right: 420px;
+}
+.THIS .divSize{
+    padding-left: 575px;
+    padding-right: 300px;
+}
+.THIS .bio {
+    margin-left: 15px;
+}
+.THIS .bio ul ol {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.THIS .bio p {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.THIS .bio li {
+    display: list-item;
+    list-style-type: disc;
+}
+.THIS .split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}

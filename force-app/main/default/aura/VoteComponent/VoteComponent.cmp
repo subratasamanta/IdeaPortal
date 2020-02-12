@@ -1,0 +1,57 @@
+<aura:component controller="VoteController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="ideaRecordId" type="Id" description="Idea Record Id"  />    
+    <aura:attribute name="ideaRecord" type="object" description="Idea Record Id"  />
+    <!--<aura:attribute name="ideaSet" type="Idea_Setting__mdt" />-->
+    <aura:attribute name="loggedInUser" type="Id" description="loggedInUser Id" />
+    <aura:attribute name="voteReocrd" type="object" description="Idea Record Id" />
+    <aura:attribute name="isLoaded" type="Boolean" default="false" />
+    <aura:attribute name="upvoteStyle" type="string" default="" />
+    <aura:attribute name="downvoteStyle" type="string" default="" />
+    <aura:attribute name="showUpvote" type="Boolean" default="true" />
+    <aura:attribute name="showDownvote" type="Boolean" default="true" />    
+    <aura:attribute name="isUpvoted" type="Boolean" default="false" />
+    <aura:attribute name="isDownvoted" type="Boolean" default="false" />
+    <aura:attribute name="disableButtons" type="Boolean" default="false" />  
+    <aura:attribute name="isWithdrawnVote" type="Boolean" default="false" /> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+   	
+    
+    <aura:if isTrue="{!and (v.disableButtons , and(!v.isUpvoted, !v.isDownvoted))}">
+        <lightning:icon iconName="utility:like" size="small" variant="true" />
+        <span class="slds-p-left_x-small">{!v.ideaRecord.Upvote_Sum__c}</span>
+        <span class="slds-p-left_xx-large"/>
+        <lightning:icon iconName="utility:dislike" size="small" variant="true"/>
+        <span class="slds-p-left_x-small">{!v.ideaRecord.DownVote_Sum__c}</span>
+    </aura:if>
+  	
+    
+    <aura:if isTrue="{!and(v.showUpvote , !(v.disableButtons))}">
+        <span class="slds-p-left_medium"/>
+        <lightning:buttonIcon aura:id="upvote1" iconName="utility:like" size="x-large"  onclick="{!c.upvote}" 
+                              alternativeText="Upvote" iconClass="vote"  class="upvoteFocus"  />
+        <span class="slds-p-left_x-small">{!v.ideaRecord.Upvote_Sum__c}</span>
+        <span class="slds-p-left_xx-large "/>
+    </aura:if>
+    <aura:if isTrue="{!and(v.showDownvote , !(v.disableButtons))}"> 
+        <span class="slds-p-left_xx-small "></span>
+        <lightning:buttonIcon aura:id="downvote1" iconName="utility:dislike" size="large"  onclick="{!c.downvote}" 
+                              alternativeText="Downvote"  iconClass="vote"  class="downvoteFocus"  />
+        <span class="slds-p-left_x-small">{!v.ideaRecord.DownVote_Sum__c}</span>
+    </aura:if>
+    <aura:if isTrue="{!(v.isUpvoted )}" >
+        <lightning:icon aura:id="upvote2" iconName="utility:like" size="small" variant="true" class="upvote-green" onclick="{!c.greenButtonClicked}"/>
+        <span class="slds-p-left_x-small">{!v.ideaRecord.Upvote_Sum__c}</span>
+        <span class="slds-p-left_xx-large"/>
+            <lightning:icon aura:id="downvote2" iconName="utility:dislike" size="small" variant="true"/>
+        <span class="slds-p-left_x-small">{!v.ideaRecord.DownVote_Sum__c}</span>
+    </aura:if>
+    <aura:if isTrue="{!(v.isDownvoted)}" >
+        <lightning:icon  aura:id="upvote3" iconName="utility:like" size="small" variant="true"/>
+        <span class="slds-p-left_x-small ">{!v.ideaRecord.Upvote_Sum__c}</span>    
+        <span class="slds-p-left_xx-large "/>
+        <lightning:icon aura:id="downvote3" iconName="utility:dislike" size="small" class="downvote-red" onclick="{!c.redButtonClicked}"/>
+        <span class="slds-p-left_x-small">{!v.ideaRecord.DownVote_Sum__c}</span>
+    </aura:if>
+ 
+    
+</aura:component>

@@ -1,0 +1,213 @@
+<aura:component  controller="IdeaController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+        <aura:attribute name='IdeaDetails' Type='Idea__c'  default="{'sobjectType': 'Idea__c',
+                                                                'Name': '',
+                                                                'Idea_Description__c': ' ',
+                                                                'Ideas__c':'',
+                                                                'SubIdeas__c':'',
+                                                                'Status__c':'Submitted'
+                                                                }"/>  
+    <aura:attribute name="objDetail" type="Idea__c" default="{'sobjectType' : 'Idea__c'}"/>
+    <aura:attribute name="controllingField" type="string" default="Ideas__c" description="store field API name of Controller field"/>
+    <aura:attribute name="dependingField" type="string" default="SubIdeas__c" description="store field API name of dependent field"/>
+    <aura:attribute name="ControllingpickListOptions" type="list" default="[]" description="to store controller field values"/>
+    <aura:attribute name="DependingpickListOptions" type="list" default="['--- None--']" description="to store dependent field values"/>
+    <aura:attribute name="depnedentFieldMap" type="map" description="map to store dependent values with controlling value"/>
+    <aura:attribute name="bDisabledDependentFld" type="boolean" default="true"/> 
+    <aura:attribute name="isBoolErrorMessage" type="Boolean" default="" />
+    <aura:attribute name="disableButton" type="Boolean" default="true" />
+    
+    <aura:attribute name="isOpenModal" type="boolean" />
+    <aura:attribute name="isOpenModalFirst" type="Boolean" default="true" />
+    <aura:attribute name="isOpenModalSecond" type="Boolean" default="false" />
+    <aura:attribute name="isOpenModalThird" type="Boolean" default="false" />
+    <aura:attribute name="isOpenModalPostIdea" type="Boolean" default="false" />
+    
+    <aura:attribute name="errorMessage" type="String" default="You haven't composed anything yet."/>
+    <aura:attribute name="validity" type="Boolean" default="true"/>
+    <aura:attribute name="errorShow" type="Boolean" default="false" />
+    <aura:attribute name="errorShowSecond" type="Boolean" default="false" />
+    <aura:attribute name="openButtonsFirst" type="Boolean" default="true" />
+    <aura:attribute name="openButtonsSecond" type="Boolean" default="false" />
+    <aura:attribute name="openButtonsThird" type="Boolean" default="false" />	
+    <aura:attribute name="accordianItems" type="object[]"/>
+    <aura:attribute name="isShowAlert" type="Boolean" default="false" />
+    <aura:attribute name="wrapIdea" type="IdeaController.WrapIdeasWithComments[]"/>  
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    
+    <lightning:button class="buttonPostIdea" variant="brand" label="Post an Idea" iconName="utility:light_bulb" aura:id="Popular-Ideas" onclick="{!c.openModal}" />  
+    <!-- Idea form starts here-->
+    <aura:if isTrue="{!v.isOpenModal}">
+        <Section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" aura:id="Modalbox" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container " >
+                <header class="slds-modal__header slds-p-right_large" style="background-color:#43547a; padding-top:10px; padding-bottom:10px;">
+                    <h2 id="header43" class="slds-text-heading--medium" style="color:white;">{!$Label.c.Post_an_Idea}</h2>
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning:icon iconName="utility:close" alternativeText="Close" onclick="{!c.closeModal}"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </header>
+                <div class="slds-modal__content slds-p-around_xx-large" style="padding-bottom:90px;">
+                    <div class="slds-wizard " role="navigation" style="padding-bottom:20px;">
+                        <ol class="slds-wizard__list">
+                            <li class="slds-wizard__item slds-is-active">
+                                <a href="javascript:void(0);" class="slds-wizard__link">
+                                    <span class="slds-wizard__marker" style="background:#42547a;"></span>
+                                    <span class="slds-wizard__label slds-text-heading-label slds-truncate">{!$Label.c.CREATE_IDEA}</span>
+                                </a>
+                            </li>
+                            <li id="checkProgressBar" class="slds-wizard__item ">
+                                <a href="javascript:void(0);" class="slds-wizard__link">
+                                    <span class="slds-wizard__marker"  id="wizard1"></span>
+                                    <span class="slds-wizard__label slds-text-heading-label slds-truncate">{!$Label.c.CHOOSE_BUSINESS_FUNCTION}</span>
+                                </a>
+                            </li>
+                            <li id="checkProgressBarSecond" class="slds-wizard__item ">
+                                <a href="javascript:void(0);" class="slds-wizard__link">
+                                    <span class="slds-wizard__marker"  id="wizard2"></span>
+                                    <span class="slds-wizard__label slds-text-heading-label slds-truncate">{!$Label.c.FINSIH_IDEA}</span>
+                                </a>
+                            </li>
+                        </ol>
+                        <span class="slds-wizard__progress" style="z-index:0;">
+                            <span id="checkProgressBarWidth" class="slds-wizard__progress-bar" style="width:0%; background:#42547a;"></span>
+                        </span>
+                    </div>
+                    
+                    <div class="slds-border_bottom ">
+                    </div>
+                    
+                    <aura:if isTrue="{!v.isOpenModalFirst}">
+                        <div class="slds-form-element__control">
+                            <aura:if isTrue="{!v.errorShow}">
+                               <!-- <div class="slds-modal__content slds-notify slds-notify-toast slds-theme-error slds-m-around-small " role="alert">
+                                    <p class="msg-title">Please correct the following error(s):</p>
+                                     <ul  class="slds-m-left_small" style="list-style: initial;">
+                                        <li class="slds-m-left_small" style="list-style: initial; "> Idea headline must be between 10 and 80 characters to achieve the recommended level of detail. Please update your headline.</li>
+                                    </ul>
+                                </div>-->
+                                <div class="msg msg-error wizard-error errorShow" id="wizard-error-msg-main" style="background: #c23934; border-radius: .35em; width: 90%; margin: 0 auto; margin-top: 1em; font-size: 1.15em; opacity: .9; padding: 6px 10px; color: #fff;">
+                                    <div class="msg-icon"></div>
+                                    <p class="msg-title">{!$Label.c.idea_creation_err}</p>
+                                    <ul style="list-style: initial;">
+                                        <li style="list-style: initial; margin-left: 20px;"> {!$Label.c.Headline_Character_Limits}</li>
+                                    </ul>
+                                </div>
+                            </aura:if>
+                            <p class="comty-tdo-intro-text" style="padding-top: 1.5em; padding-bottom: 1.5em; width: 94%; margin: auto;">
+                                {!$Label.c.Introduce_Idea}
+                            </p>
+                                <lightning:input class="slds-text-body_regular" aura:id="titleInput" type="text" label="Headline" name="Headline" required="true" value="{!v.IdeaDetails.Name}" />
+                        </div>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{!v.isOpenModalSecond}">
+                        <div class="slds-form slds-form_stacked">
+                            <div class="slds-form-element">
+                                <aura:if isTrue="{!v.errorShowSecond}">
+                                    <div class="msg msg-error wizard-error errorShow" id="wizard-error-msg-main" style="background: #c23934; border-radius: .35em; width: 90%; margin: 0 auto; margin-top: 1em; font-size: 1.15em; opacity: .9; padding: 6px 10px; color: #fff;">
+                                        <div class="msg-icon"></div>
+                                        <p class="msg-title">{!$Label.c.idea_creation_err}</p>
+                                        <ul style="list-style: initial;">
+                                            <li style="list-style: initial; margin-left: 20px;"> {!$Label.c.Business_Function}</li>
+                                        </ul>
+                                    </div>
+                                </aura:if>
+                                <p style="padding-top:20px; padding-bottom:20px;">{!$Label.c.Sub_Business_Function}</p>
+                                <div class="slds-form-element__control">
+                                    <lightning:select aura:id="cntrlField"
+                                                      name="controllerFld" 
+                                                      value="{!v.IdeaDetails.Ideas__c}"
+                                                      label="Business Functions"
+                                                      onchange="{!c.onControllerFieldChange}" required='true'>
+                                        <aura:iteration items="{!v.accordianItems}" var="val" >
+                                            <option  value="{!val}">{!val}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div aura:id="firstsection" class="{!if(v.isBoolErrorMessage == 'show','slds-show','slds-hide')}">
+                                    <div lightning-input_input="" id="help-message-35" data-help-message="true" role="alert" class="slds-form-element__help" style="color:darkred;">{!$Label.c.Custom_field}</div>
+                                </div>
+                            </div>
+                            <div class="slds-form slds-form_stacked">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <lightning:select name="dependentFld" aura:id="dependentFld"  
+                                                          value="{!v.IdeaDetails.SubIdeas__c}"
+                                                          label="SubFuntions"
+                                                          disabled="{!v.bDisabledDependentFld}" required='true'>
+                                            <aura:iteration items="{!v.DependingpickListOptions}" var="val" >
+                                                <option value="{!val}">{!val}</option>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.isOpenModalThird}">
+                        <div class="slds-form-element">
+                            <p style="padding-top:20px; padding-bottom:20px;">{!$Label.c.Headline_details}</p>
+                            <div class="slds-form-element__control">
+                                <lightning:inputRichText  aura:id="Description" label="Description" placeholder="Post Your Idea" labelVisible="true" value="{!v.IdeaDetails.Idea_Description__c}" messageWhenBadInput="{!v.errorMessage}" formats="['font', 'size','bold', 'italic', 'underline',  'strike', 'list', 'indent', 'align',
+                                                                         'clean', 'table', 'header', 'color','background','color','code','script','img']">
+                                  
+                                </lightning:inputRichText>
+                            </div>
+                        </div>
+                    </aura:if>
+                     
+                    
+                </div>
+                <aura:if isTrue="{!v.openButtonsFirst}">
+                    <div class="slds-modal__footer">
+                        <lightning:button class="buttonClassCancel" label="Cancel" onclick="{!c.closeModal}"/>&nbsp;&nbsp;
+                        <lightning:button variant="brand" label="Next" onclick="{!c.nextSecondModal}"/>
+                    </div>
+                </aura:if>
+                
+                <aura:if isTrue="{!v.openButtonsSecond}">
+                    <div class="slds-modal__footer">
+                        <lightning:button class="buttonClassCancel" label="Previous" onclick="{!c.prevfirstModal}"/>&nbsp;&nbsp;
+                        <lightning:button variant="brand" label="Next" onclick="{!c.nextThirdModal}"/>
+                    </div>
+                </aura:if>
+                
+                <aura:if isTrue="{!v.openButtonsThird}">
+                    <div class="slds-modal__footer">
+                        <lightning:button class="buttonClassCancel" label="Previous" onclick="{!c.prevSecondModal}"/>&nbsp;&nbsp;
+                        <lightning:button variant="brand" label="Post Idea" onclick="{!c.createIdea}"/>
+                    </div>
+                </aura:if>
+            </div>
+            
+        </Section>
+        
+        <div class="slds-backdrop " aura:id="Modalbackdrop"></div>
+    </aura:if>
+    <!-- Idea form ends here-->
+     <!-- Idea success message starts here-->
+        <aura:if isTrue="{!v.isOpenModalPostIdea}">
+            <section aura:id="mainPage" aria-hidden="false" role="alertdialog" tabindex="-1" aria-labelledby="prompt-heading-id" aria-modal="true" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal--prompt">
+                <div class="slds-modal__container" role="document" id="prompt-message-wrapper" tabindex="0" >
+                    <!-- ###### MODAL BOX HEADER Start ######-->
+                    <header class="slds-modal__header slds-theme--success slds-theme--alert-texture" >
+                        <h2 id="modal-heading-01" class="slds-text-heading--medium ">{!$Label.c.Post_Idea}</h2>
+                    </header>
+                    <!--###### MODAL BOX BODY Part Start######-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <p>{!$Label.c.Idea_Success}</p>
+                    </div>
+                    <!--###### MODAL BOX FOOTER Part Start ######-->
+                    <div class="slds-modal__footer slds-theme--default">
+                        <lightning:button variant="neutral" label="OK"  onclick="{! c.ok }"/>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop " aura:id="Modalbackdropmsg"></div>
+        </aura:if>
+         <!-- Idea success message ends here-->
+    
+    
+</aura:component>

@@ -1,0 +1,2 @@
+<apex:page standardController="Metrics__c" recordSetVar="a" 
+action="{!URLFOR($Action.Metrics__c.List,$ObjectType.Metrics__c)}" />

@@ -1,0 +1,244 @@
+<apex:page standardStylesheets="false">
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.Foundation, 'css/foundation.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.Foundation, 'js/jquery-1.9.1.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.Foundation, 'js/foundation.min.js')}"/>
+        <style>
+            .tavHead{background-color: #ffaa44;padding: 1%;margin: 1% 0;font-weight: bold;font-size: 20px;}
+            .tavSubHead{background-color: #fcfbe3;padding: 1%;text-align: center;margin-bottom: 1%;font-size: 15px;font-weight: bold;color:#800080;}
+            .tavNoSubHead{padding: 1%;text-align: center;font-size: 15px;font-weight: bold;}
+            .tavLinkOdd{padding: 1%;margin: 1% 0;font-size: 14px;background-color: #DDEBF7;}
+            .tavLinkEven{padding: 1%;font-size: 14px;}
+        </style>
+    </head>
+    <div class="row lightblue-bg" style="max-width: 100%;">
+        <div class="large-12 medium-12 small-12 columns text-center tavHead">
+            Tavant Management Reports 2019
+        </div>
+        <div class="large-12 medium-12 small-12">
+            
+            <div class="left large-6 medium-6 small-12 columns">
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Sales Management Reports
+                </div>
+                
+                                                                                <!--Start of 2019 rows -->
+                              
+                  
+                 <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O1T000006EHtm" target="_blank">2019 Sales 
+                    
+                     Forecast by Accounts</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Billing Forecast by Accounts, with Actual, Expected, Likely and Forecast</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O1T000006EHtr" target="_blank">2019 Sales Billing Forecast by RSD/CP</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Billing Forecast by RSD/CP, with Actual, Expected, Likely and Forecast</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O1T000006EHu6" target="_blank">2019 Booking Forecast by Accounts</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Booking Forecast by Accounts - with Pipeline, Bestcase, Commit and Closed</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O1T000006EHtw" target="_blank">2019 Booking Forecast by RSD/CP</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Booking Forecast by RSD/CP - with Pipeline, Bestcase, Commit and Closed</div>
+                </div>        
+                        
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O500000065RjT" target="_blank">2019 Existing Business Bomb Run</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Billing Forecast by RSD/CP for Opportunities Closing CQ with Likely >= $500K</div>
+                </div>  
+                           
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O500000065dMq" target="_blank">2019 New Business Bomb Run</a></div>
+                    <div class="large-8 medium-6 small-12 columns">12 Month Revenue Potential and Billing Forecast for Bomb Run Accounts</div>
+                </div>    
+                                                                      <!--End of 2019 rows -->
+                                                                    <!--Start of Audit Reports--> 
+                </div>                                          
+            <div class=" right large-6 medium-6 small-12 columns">
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                        Delta Reports    
+                </div>
+
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.lightning.force.com/lightning/r/Report/00O1T000006QSLBUA4/view" target="_blank">Q2 Account Forecast vs Likely Delta Report</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report shows the delta between Forecast and Likely for the current Quarter.</div>
+                </div>         
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.lightning.force.com/lightning/r/Report/00O1T000006QSK8UAO/view" target="_blank">Q2 Account Likely vs Expected Delta Report</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report shows the delta between Likely and Expected for the current Quarter.</div>
+                </div>                   
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O50000005hEJ9" target="_blank">2018 Off Range Billings</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Shows opportunities with 2018 billings while SOW End or Close Date in previous FY</div>
+                </div>                 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O50000002vTit" target="_blank">Opportunities Missing Lead Source</a></div>
+                    <div class="large-8 medium-6 small-12 columns">These are closed opportunities who need to have Lead Source and <br/>Campaign filled in.</div>
+                </div> 
+                    
+                                                                     <!--End of Audit Reports-->
+                                                                     <!--Start of Lead Reports-->
+                
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Lead Reports and Dashboards
+                </div>      
+                                                     
+                                                                     
+                                                                     <!--End of Lead Reports-->
+                   <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O500000065ED2" target="_blank">2018 Conference Lead Aging Report by RSD</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Leads from conferences by RSD/CP.</div>
+                </div>       
+                      <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O50000002bqyu" target="_blank">RSD Conference Leads</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Leads from conferences. Pick the appropriate conference - click on the search icon</div>
+                </div>   
+                   <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z50000000jVA6" target="_blank">2018 Leads Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Leads from all sources. </div>
+                </div>               
+                                                                    <!--Start of Change Reports-->
+     
+              
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Change Identification Reports and Dashboards
+                </div>      
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O500000066XAo" target="_blank">Daily Pipeline Change Report</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report provides an overview of key changes by sales person comparing yesterdays pipeline to today.</div>
+
+                </div>      
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z50000000iTT2" target="_blank">Change Tracking Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This Dashboard provides a quick view of key changes by sales person. From the snapshot data.</div>
+                </div>               
+                                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O50000002v9gD" target="_blank">Downgraded Opportunities</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Opportunities that have been downgraded, moved down/backwards in sales stage.</div>
+                </div>               
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O50000004J55B" target="_blank">Billing Detail Changes</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Billing Detail Changes</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O50000002v9hG" target="_blank">Opportunity Field changes in last 7 days</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Shows key field changes in the last 7 days for all opportunities.</div>
+                </div>         
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O50000002uq86" target="_blank">Opportunity Aging Report</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report shows how long each opportunity has been in which stage.</div>
+                </div>                  
+                
+                                                                       <!--End of Change Reports-->
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Training Materials
+                </div>        
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01550000000juMo" target="_blank">What is Forecast Category?</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Presentation about Forecast Category</div>
+                </div>         
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01550000000azW9" target="_blank">Salesforce 101 for Tavant Training Document</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Basic Salesforce Training</div>
+                </div>                       
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Administrative Reports
+                </div>   
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/00O50000002vEDb" target="_blank">Active Users report</a></div>
+                    <div class="large-8 medium-6 small-12 columns">All active licensed users and Chatter users; shows, role and when they last logged in.</div>
+                </div>                
+            </div>
+            
+            <div class=" right large-6 medium-6 small-12 columns">
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Sales Management Dashboards
+                </div>
+                                                                         <!--Start of 2019 rows -->
+                             
+                 
+                   
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bi4" target="_blank">2019 Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2019 Billings Dashboard</div>
+                </div>         
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bi9" target="_blank">2019 Bookings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 Bookings Dashboard</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bky" target="_blank">2019 Vertical Practice Billing Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 Vertical Practice Billing Dashboard</div>
+                </div>     
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bnn">2019 Vertical Practice Billing Performance Meter</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 Vertical Practice Billing Performance Meter</div>
+                </div>       
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bns" target="_blank">2019 Horizontal Practice Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 Horizontal Practice Billings Dashboard</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bnx" target="_blank">2019 Product Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 Product Sales and Quotas</div>
+                </div> 
+                
+                
+                
+                <div class="large-12 medium-12 small-12 columns tavNoSubHead">
+                    EAST    
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bo2" target="_blank">2019 East Team Bookings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 East Bookings Dashboard</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bo7" target="_blank">2019 East Team Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 East Billing Dashboard</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013BoC" target="_blank">2019 Booking Performance Meter East</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 Booking Performance Dashboard</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bog" target="_blank">2019 Billing Performance Meter East</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This includes a measure for each RSD/CP against thier goals. The Yellow means you have achieved your Quota. The Green represents achieving your multiplier.</div>
+                </div>
+     
+
+                
+                
+                <div class="large-12 medium-12 small-12 columns tavNoSubHead">
+                    WEST    
+                
+                </div>  
+                  <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bol" target="_blank">2019 West Team Bookings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 West Bookings Dashboard</div>
+
+                </div>  
+                  <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Boq" target="_blank">2019 West Team Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 West Billing Dashboard</div>
+                </div>  
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bov" target="_blank">2019 Booking Performance Meter West</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2018 Booking Performance Dashboard</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://tavant-sso.my.salesforce.com/01Z1T0000013Bp0" target="_blank">2019 Billing Performance Meter West</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This includes a measure for each RSD/CP against thier goals. The Yellow means you have achieved your Quota. The Green represents achieving your multiplier.</div>
+                </div>                                                         
+                               
+                                         
+                 
+                 
+
+               
+                                                                        <!--End of 2018 rows -->
+                                                                                          </div>
+        </div>
+    </div>
+</apex:page>

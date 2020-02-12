@@ -1,0 +1,33 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="contactName" type="String" />
+    <aura:attribute name="accountName" type="String" />
+    <aura:attribute name="Picture" type="String" /> 
+    <aura:attribute name="Phone" type="Integer" />
+    <aura:attribute name="Title" type="String" /> 
+    <aura:attribute name="NumberOfCertifications" type="Integer" />  
+    <aura:attribute name="Introduction" type="String" />    
+    
+    <div class="demo-only" style="width: 30rem;">
+        <article class="slds-tile">
+            <h3 class="slds-tile__title slds-truncate" title="Contacts UX"><a href="javascript:void(0);">Contacts UX</a></h3>
+            <div class="slds-tile__detail">
+                <dl class="slds-list_horizontal slds-wrap">
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="First Label">Contact Name:</dt>
+                    <dd class="slds-item_detail slds-truncate" title="Description for first label">{!v.contactName}</dd>
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label">Account Name:</dt>                    
+                    <dd class="slds-item_detail slds-truncate" title="Description for second label">{!v.accountName}</dd>                    
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Third Label">Image:</dt>                    
+                    <dd class="slds-item_detail slds-truncate" title="Description for Third label">{!v.Picture}</dd> 
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Third Label">Phone:</dt>                    
+                    <dd class="slds-item_detail slds-truncate" title="Description for Third label">{!v.Phone}</dd> 
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Third Label">Title:</dt>                    
+                    <dd class="slds-item_detail slds-truncate" title="Description for Third label">{!v.Title}</dd>     
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Third Label">NumberOfCertifications:</dt>                    
+                    <dd class="slds-item_detail slds-truncate" title="Description for Third label">{!v.NumberOfCertifications}</dd>     
+                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Third Label">Introduction:</dt>                    
+                    <dd class="slds-item_detail slds-truncate" title="Description for Third label">{!v.Introduction}</dd>     
+                </dl>                
+            </div>            
+        </article>        
+    </div>   
+</aura:component>

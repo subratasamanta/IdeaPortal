@@ -1,0 +1,369 @@
+<apex:page standardStylesheets="false">
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.Foundation, 'css/foundation.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.Foundation, 'js/jquery-1.9.1.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.Foundation, 'js/foundation.min.js')}"/>
+        <style>
+            .tavHead{background-color: #ffaa44;padding: 1%;margin: 1% 0;font-weight: bold;font-size: 20px;}
+            .tavSubHead{background-color: #fcfbe3;padding: 1%;text-align: center;margin-bottom: 1%;font-size: 15px;font-weight: bold;color:#800080;}
+            .tavNoSubHead{padding: 1%;text-align: center;font-size: 15px;font-weight: bold;}
+            .tavLinkOdd{padding: 1%;margin: 1% 0;font-size: 14px;background-color: #DDEBF7;}
+            .tavLinkEven{padding: 1%;font-size: 14px;}
+        </style>
+    </head>
+    <div class="row lightblue-bg" style="max-width: 100%;">
+        <div class="large-12 medium-12 small-12 columns text-center tavHead">
+            Tavant Management Reports 2017
+        </div>
+        <div class="large-12 medium-12 small-12">
+            
+            <div class="left large-6 medium-6 small-12 columns">
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Sales Management Reports
+                </div>
+                
+                                                                                <!--Start of 2017 rows -->
+                              
+                <div class="large-12 medium-12 small-12 columns tavNoSubHead">
+                    2017    
+                </div>  
+                 <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000055wGm" target="_blank">2017 Sales 
+                    
+                     Forecast by Accounts</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Billing Forecast by Accounts, with Actual, Expected, Likely and Forecast</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000055wH1" target="_blank">2017 Sales Billing Forecast by RSD/CP</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Billing Forecast by RSD/CP, with Actual, Expected, Likely and Forecast</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000055wH6" target="_blank">2017 Booking Forecast by Accounts</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Booking Forecast by Accounts - with Pipeline, Bestcase, Commit and Closed</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000055wHB" target="_blank">2017 Booking Forecast by RSD/CP</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Booking Forecast by RSD/CP - with Pipeline, Bestcase, Commit and Closed</div>
+                </div>        
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000055wHG" target="_blank">2017 Likely Bookings</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 Likely Bookings</div>
+                </div>   
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000055wHV" target="_blank">2017 RSD/CP Sales Quota</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report simply shows the Quotas for each of the Sales people, both RSD and CP</div>
+                </div>           
+                         
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000005qFCd" target="_blank">2017 Big Deals by RSD/CP</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Billing Forecast by RSD/CP for Opportunities Closing CQ with Likely >= $150K</div>
+                </div>  
+                                                                      <!--End of 2017 rows -->
+                                                                    <!--Start of Audit Reports--> 
+                </div>                                          
+            <div class=" right large-6 medium-6 small-12 columns">
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                        Audit Reports    
+                </div>
+
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002vClG" target="_blank">Bookings Missed Close Date</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report shows opportunities with close dates in the past. These close dates need to be adjusted</div>
+                </div>         
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002vJ4l" target="_blank">Billing Before Close</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report shows closed opportunities that have billing records/dates prior to the opportunity close date. The billing record dates need to be pushed to after the close date.</div>
+                </div>                   
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000005hEJ9" target="_blank">2017 Off Range Billings</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Shows opportunities with 2016 billings while SOW End or Close Date in previous FY</div>
+                </div>                 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002vTit" target="_blank">Opportunities Missing Lead Source</a></div>
+                    <div class="large-8 medium-6 small-12 columns">These are closed opportunities who need to have Lead Source and <br/>Campaign filled in.</div>
+                </div> 
+                    
+                                                                     <!--End of Audit Reports-->
+                                                                     <!--Start of Lead Reports-->
+                
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Lead Reports and Dashboards
+                </div>      
+                                                     
+                                                                     
+                                                                     <!--End of Lead Reports-->
+                   <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000005hEFv" target="_blank">2017 Conference Lead Aging Report by RSD</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Leads from conferences. Pick the appropriate conference - click on the search icon</div>
+                </div>       
+                      <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002bqyu" target="_blank">RSD Conference Leads</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Leads from conferences. Pick the appropriate conference - click on the search icon</div>
+                </div>   
+                   <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000jVA6" target="_blank">2017 Leads Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Leads from all sources. </div>
+                </div>               
+                                                                    <!--Start of Change Reports-->
+     
+              
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Change Identification Reports and Dashboards
+                </div>      
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000iTT2" target="_blank">Change Tracking Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This Dashboard provides a quick view of key changes by sales person. From the snapshot data.</div>
+                </div>               
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002v6SL" target="_blank">Snapshot Change reports</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report shows changes in Forecast, Expected, ACtual and Probability Changes over time</div>
+                </div>     
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002v9gD" target="_blank">Downgraded Opportunities</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Opportunities that have been downgraded, moved down/backwards in sales stage.</div>
+                </div>               
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000004J55B" target="_blank">Billing Detail Changes</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Billing Detail Changes</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002v9hG" target="_blank">Opportunity Field changes in last 7 days</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Shows key field changes in the last 7 days for all opportunities.</div>
+                </div>         
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002uq86" target="_blank">Opportunity Aging Report</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report shows how long each opportunity has been in which stage.</div>
+                </div>                  
+                
+                                                                       <!--End of Change Reports-->
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Training Materials
+                </div>        
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01550000000juMo" target="_blank">What is Forecast Category?</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Presentation about Forecast Category</div>
+                </div>         
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01550000000azW9" target="_blank">Salesforce 101 for Tavant Training Document</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Basic Salesforce Training</div>
+                </div>                       
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Administrative Reports
+                </div>   
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002vEDb" target="_blank">Active Users report</a></div>
+                    <div class="large-8 medium-6 small-12 columns">All active licensed users and Chatter users; shows, role and when they last logged in.</div>
+                </div>                
+            </div>
+            
+            <div class=" right large-6 medium-6 small-12 columns">
+                <div class="large-12 medium-12 small-12 columns tavSubHead">
+                    Sales Management Dashboards
+                </div>
+                                                                         <!--Start of 2017 rows -->
+                             
+                <div class="large-12 medium-12 small-12 columns tavNoSubHead">
+                    2017    
+                </div>  
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2J4" target="_blank">2017 Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 Billings Dashboard</div>
+                </div>         
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2J9" target="_blank">2017 Bookings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 Bookings Dashboard</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2JE" target="_blank">2017 West Team Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 West Billing Dashboard</div>
+                </div>                                            
+                 <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2JY" target="_blank">2017 East Team Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 East Billing Dashboard</div>
+                </div>      
+              
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2wV" target="_blank">2017 Booking Performance Meter East</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 Booking Performance Dashboard</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2wf" target="_blank">2017 Booking Performance Meter West</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 Booking Performance Dashboard</div>
+                </div>         
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2mu" target="_blank">2017 Billing Performance Meter East</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This includes a measure for each RSD/CP against thier goals. The Yellow means you have achieved your Quota. The Green represents achieving your multiplier.</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2mz" target="_blank">2017 Billing Performance Meter West</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This includes a measure for each RSD/CP against thier goals. The Yellow means you have achieved your Quota. The Green represents achieving your multiplier.</div>
+                </div> 
+
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2ZW" target="_blank">2017 Vertical Practice Billing Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 Vertical Practice Billing Dashboard</div>
+                </div>     
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000o2bN" target="_blank">2017 Horizontal Practice Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 Horizontal Practice Billings Dashboard</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000jVaE" target="_blank">2017 Product Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2017 Horizontal Practice Billings Dashboard</div>
+                </div> 
+                                                                        <!--End of 2017 rows -->
+                                                                              <!--Start of 2016 rows -->
+                
+                             
+                <div class="large-12 medium-12 small-12 columns tavNoSubHead">
+                    2016    
+                </div>  
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000056AlP" target="_blank">2016 Sales Billing Forecast by Accounts</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Billing Forecast by Accounts, with Actual, Expected, Likely and Forecast</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000056AmS" target="_blank">2016 Sales Billing Forecast by RSD/CP</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Billing Forecast by RSD/CP, with Actual, Expected, Likely and Forecast</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000004J2oD" target="_blank">2016 Booking Forecast by Accounts</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Booking Forecast by Accounts - with Pipeline, Bestcase, Commit and Closed</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000056AmX" target="_blank">2016 Booking Forecast by RSD/CP</a></div>
+                    <div class="large-8 medium-6 small-12 columns">YTD Booking Forecast by RSD/CP - with Pipeline, Bestcase, Commit and Closed</div>
+                </div>        
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000004IsTe" target="_blank">2016 Likely Bookings</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2016 Likely Bookings</div>
+                </div>   
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002v8LZ" target="_blank">2016 RSD/CP Sales Quota</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report simply shows the Quotas for each of the Sales people, both RSD and CP</div>
+                </div>           
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O50000002v643" target="_blank">Vertical Practice Quota</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This report simply shows the Quotas <br/>for the vertical practices</div>
+                </div>         
+                 
+                
+                                                                            <!--End of 2016 rows -->
+                                                                        <!--Start of 2016 rows -->
+                             
+                <div class="large-12 medium-12 small-12 columns tavNoSubHead">
+                    2016    
+                </div>  
+
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000jI7w" target="_blank">2016 Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2016 Billings Dashboard</div>
+                </div>
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000Ucw9" target="_blank">2016 West Team Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2016 West Billing Dashboard</div>
+                </div>            
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000yYH1" target="_blank">2016 East Team Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2016 East Billing Dashboard</div>
+                </div>          
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000jIB0" target="_blank">2016 Bookings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2016 Bookings Dashboard</div>
+                </div>        
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000jI7m" target="_blank">2016 Vertical Practice Billing Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2016 Vertical Practice Billing Dashboard</div>
+                </div>   
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000an9c" target="_blank">2016 Horizontal Practice Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2016 Horizontal Practice Billings Dashboard</div>
+                </div>       
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000anEN" target="_blank">2016 Booking Performance Meter</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2016 Booking Performance Dashboard</div>
+                </div>        
+  
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000yYHQ" target="_blank">New Client Acquisition Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This dashboard shows when we acquire a customer for the first time. If you wish to see the report itself, just click on the chart.</div>
+                </div>                           
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000anBT" target="_blank">2016 Sales Performance Meter</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This includes a measure for each RSD/CP against thier goals. The Yellow means you have achieved your Quota. The Green represents achieving your multiplier.</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000yYGw" target="_blank">2016 West Team Performance Meter</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This is the measure of each West Team member's performance against their goals.</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000yYGr" target="_blank">2016 East Team Performance Meter</a></div>
+                    <div class="large-8 medium-6 small-12 columns">This is the measure of each East Team member's performance against their goals.</div>
+                </div> 
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000iUpc" target="_blank">2016 Vertical Practice Performance Meter</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Gauge dashboard for vertical performance against target</div>
+                </div>        
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000anQY" target="_blank">2016 Horizontal Practice Performance Meter</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Gauge dashboard for horizontal performance against target</div>
+                </div>            
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000iSQt" target="_blank">2016 Corporate Bookings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Summary of Bookings against RSD/CP Quotas</div>
+                </div>                         
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000iUoe" target="_blank">2016 Practice Billing Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">Practice Billing Dashboard</div>
+                </div>                
+                <div class="large-12 medium-12 small-12 columns tavNoSubHead">
+                    2015
+                </div>  
+                  <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000040nqA" target="_blank">2015 Sales Forecast By Account</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2015 Billing Forecast by Accounts,with Actual, Expected, Likely and Forecast</div>
+                </div>          
+                
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/00O500000040nsL" target="_blank">2015 Sales Forecast By RSD/CP</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2015 Billing Forecast by RSD/CP,with Actual, Expected, Likely and Forecast</div>
+                </div>            
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000LuIM" target="_blank">2015 Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2015 Billings Dashboard</div>
+                </div>                   
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000LvJB" target="_blank">2015 Bookings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2015 Bookings Dashboard</div>
+                </div>           
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000LvJ6" target="_blank">2015 Vertical Practice Billing Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2015 Vertical Practice Billing Dashboard</div>
+                </div>          
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000Lw9H" target="_blank">2015 Horizontal Practice Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2015 Horizontal Practice Billings Dashboard</div>
+                </div>        
+                <div class="large-12 medium-12 small-12 columns tavNoSubHead">
+                    2014
+                </div>    
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000j2XU" target="_blank">2014 Sales Performance Meter</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2014 Sales Performance Dashboard</div>
+                </div>          
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000j2UL" target="_blank">2014 Bookings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2014 Bookings Dashboard</div>
+                </div>                
+                <div class="large-12 medium-12 small-12 columns tavLinkOdd">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000j0ku" target="_blank">2014 Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2014 Billings Dashboard</div>
+                </div>       
+                <div class="large-12 medium-12 small-12 columns tavLinkEven">
+                    <div class="large-4 medium-6 small-12 columns"><a href="https://na3.salesforce.com/01Z50000000j2KB" target="_blank">2014 Vertical Practice Billings Dashboard</a></div>
+                    <div class="large-8 medium-6 small-12 columns">2014 Vertical Practice Billings Dashboard</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:page>

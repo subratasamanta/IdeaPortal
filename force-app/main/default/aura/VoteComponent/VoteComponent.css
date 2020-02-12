@@ -1,0 +1,22 @@
+.THIS.upvote-green svg{
+   fill : green;
+    align-items: center; 
+}
+.THIS.downvote-red svg{
+   fill : red;
+   align-items: center;
+}
+
+.THIS.upvoteFocus:hover {
+  background-color: rgb(0,128,0);
+    color: white;
+}
+
+.THIS.upvoteFocus svg{
+
+}
+
+.THIS.downvoteFocus:hover {
+  background-color:rgb(220,20,60);  
+  color:white;
+}

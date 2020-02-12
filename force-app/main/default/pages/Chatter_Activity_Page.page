@@ -1,0 +1,31 @@
+<apex:page controller="ChatterActivityCtrl" tabstyle="Account" doctype="html-5.0">
+
+<apex:pagemessages />
+<apex:form >
+
+    <apex:pageBlock title="Chatter Activity">
+        <apex:pageBlock > 
+            <apex:pageBlockSection columns="2" title="Date Range">
+                
+                <apex:input required="true" label="From Date" value="{!SFromDate}" type="date" html-min="0" html-max="10" html-step="1" />                
+                <apex:input required="true" label="To Date" value="{!SToDate}" type="date" html-min="0" html-max="10" html-step="1" />  
+                <apex:inputCheckbox value="{!CountComments}" Label="Count Comments"/>               
+    
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton action="{!runReport}" value="Run Report"/>
+        </apex:pageBlockButtons> 
+    </apex:pageBlock>
+
+    <apex:pageBlock >                        
+        <apex:pageBlockSection columns="1" title="Result">     
+            <apex:pageblockTable value="{!ReportWrprList}" var="rw" id="ServiceInfoGrid">
+                <apex:column headerValue="User Name">{!rw.UserName}</apex:column>
+                <apex:column headerValue="Post Count">{!rw.PostCount}</apex:column>
+            </apex:pageblockTable>
+        </apex:pageBlockSection>                        
+    </apex:pageBlock>
+
+</apex:form>
+</apex:page>

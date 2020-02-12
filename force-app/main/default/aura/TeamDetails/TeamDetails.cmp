@@ -1,0 +1,42 @@
+<aura:component controller="ProductTeamController" implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="activeSections" type="List" default="['','']" />
+    <aura:attribute name="contactList" type="contact[]" />
+    <aura:attribute name="isDVisible" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />  
+    
+    <aura:attribute name="masterList" type="List" default="[['A-1001','A-1002']]" />
+    <div style="background-color:white" class="slds-p-around_xx-large">
+        <lightning:accordion
+                             allowMultipleSectionsOpen="true"
+                             onsectiontoggle="{! c.handleSectionToggle }"
+                             activeSectionName="{! v.activeSections }"  >
+                           
+            
+            <aura:iteration items="{!v.contactList}" var="item">
+                <lightning:accordionSection name="A" label="{!item.Name}">
+                    <aura:set attribute="body">
+                        <c:ProductTeamChild contactName="{!item.Name}" accountName="{!item.Account.Name}" Picture="{!item.Picture__c}" Phone="{!item.Phone}" Title="{!item.Title}" NumberOfCertifications="{!item.NumberOfCertifications__c}" Introduction="{!item.Introduction__c}"/><br/>
+                    </aura:set>
+                </lightning:accordionSection> 
+                
+            </aura:iteration>  
+            
+        </lightning:accordion>  
+        
+    </div>
+   <!-- <div>
+        <lightning:layout horizontalAlign="spread" multipleRows="true">
+            <aura:iteration items="{!v.masterList}" var="row">
+                <lightning:layoutItem size="12">
+                    <lightning:layout horizontalAlign="spread">
+                        <aura:iteration items="{!row}" var="cell">
+                            <lightning:layoutItem size="5" class="slds-border_top slds-border_left slds-border_right slds-border_bottom slds-p-around_medium slds-align_absolute-center">
+                                <div class="custom-box">{!cell}</div>
+                            </lightning:layoutItem>
+                        </aura:iteration>
+                    </lightning:layout>
+                </lightning:layoutItem>
+            </aura:iteration>
+        </lightning:layout>
+    </div>-->
+</aura:component>

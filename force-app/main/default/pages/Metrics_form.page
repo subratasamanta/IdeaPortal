@@ -1,0 +1,63 @@
+<apex:page standardController="Metrics__c">
+ <apex:form >
+ <script type="text/javascript">
+  var flag=0;
+  window.onload = init;
+       function init() { 
+        
+             
+              document.getElementById("j_id0:j_id1:j_id3:j_id34:input_field").disabled = true;  
+              document.getElementById("j_id0:j_id1:j_id3:j_id34:j_id38").disabled = false; 
+            
+                }  
+                
+                 
+           function hideshow(){
+               var mytextvalue = document.getElementById("j_id0:j_id1:j_id3:j_id34:grade").value;
+              
+             if(flag==0){
+             
+              document.getElementById("j_id0:j_id1:j_id3:j_id34:input_field").disabled = false;
+              document.getElementById("j_id0:j_id1:j_id3:j_id34:j_id38").disabled = true;
+              flag=1;
+             }
+             else
+             {
+            
+              document.getElementById("j_id0:j_id1:j_id3:j_id34:input_field").disabled = true;
+               document.getElementById("j_id0:j_id1:j_id3:j_id34:j_id38").disabled = false;
+               flag=0;
+             }
+           
+               }     
+                              
+
+        </script>
+      <apex:pageBlock >
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton action="{!save}" value="Save">
+              </apex:commandButton>
+            <apex:commandButton action="{!cancel}" value="Cancel">
+              </apex:commandButton>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection columns="1">
+            <apex:inputField value="{!Metrics__c.Name}"></apex:inputField>
+            <apex:inputField value="{!Metrics__c.Category__c}"></apex:inputField>
+            <apex:inputField value="{!Metrics__c.Department__c}"></apex:inputField>
+            <apex:inputCheckbox id="grade" selected="true" value="{!Metrics__c.Grade__c}" onchange="hideshow();" />
+            <apex:inputField value="{!Metrics__c.Yearly_Target__c}"></apex:inputField>
+            <apex:inputField id="input_field" value="{!Metrics__c.Yearly_Target2__c}" ></apex:inputField>
+            <apex:inputField value="{!Metrics__c.Objective__c}"></apex:inputField>
+            <apex:inputField value="{!Metrics__c.Scorecard__c}"></apex:inputField>
+            <apex:inputField value="{!Metrics__c.Score_formula__c}"></apex:inputField>
+            <apex:inputField value="{!Metrics__c.Sub_Department__c}"></apex:inputField>            
+            <apex:inputField value="{!Metrics__c.Weightage_1__c}"></apex:inputField>
+            <apex:inputField value="{!Metrics__c.Weightage_2__c}"></apex:inputField>
+            <apex:inputField value="{!Metrics__c.Metric_Type__c}"></apex:inputField>
+
+            
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+ </apex:form>
+</apex:page>

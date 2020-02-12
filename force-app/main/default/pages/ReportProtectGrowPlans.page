@@ -1,0 +1,151 @@
+<apex:page standardController="Protect_Grow_Plan__c" contentType="application/x-excel#ProtectGrowPlanReport.xls" extensions="ReportProtectPlanGrowCtrl">
+    <apex:form >
+    	<apex:pageBlock >
+        	<table width="100%" id="tblReport" cellpadding="0" cellspacing="0" border=" #F2F2F2" >
+             	<tr>
+                	<td align="center" ColSpan="18" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> <apex:outputText value="{!PGP.Customer__r.Name}"/> - Protect &amp; Grow Plan - <apex:outputText value="{!PGP.Financial_Year__c}"/> </td> 
+                </tr>
+             	<tr>
+           			 <td align="center" ColSpan="18" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> <apex:outputText value="{!PGP.Report_Description__c}"/> </td> 
+            	 </tr>
+            	 <tr>
+
+
+                      <td align="center" RowSpan="2" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;" > Client / Owner (Account Name) </td>
+               		 <td align="center" RowSpan="2" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;" > Opportunity </td>
+               		 <td align="center" RowSpan="2" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Prev FY Total  </td>
+			  	 	<td align="center"  colspan="5" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;" > Projection of (A) for Curr FY(In Millions) </td>
+			  	 	<td align="center"  colspan="5" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;" > Potential for New Services (B)(In Millions) </td>
+           	 	 	<td align="center"  colspan="5" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;" >  Total potential for Current FY (A+B)(In Millions)  </td>
+             	</tr>
+            	 <tr>      
+                 	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q1 </td>
+                 	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q2 </td>
+                 	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q3 </td>
+                   	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q4 </td>
+                	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Total </td>
+                	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q1 </td>
+                	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q2 </td>
+                	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q3 </td>
+                 	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q4 </td>
+                	 <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Total </td>
+               	     <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q1 </td>
+                     <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q2 </td>
+                     <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q3 </td>
+                     <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Q4 </td>
+                     <td align="center" style="padding-top:8px; color: Black;  width: 10%; height: 25px; font-weight : bold;"> Total </td>
+                </tr>
+                <apex:repeat value="{!PGPDetailsWrpr}" var="PGPD">
+                <tr> 
+                    
+
+                    
+                    
+                    
+                    
+                    <td align="center" style="font-weight : bold; padding-top:8px;  width: 10%; height: 25px;" >
+                	 	<apex:outputText value="{!PGPD.contactName}"/>
+                 	</td>
+               		 <td align="center" style="font-weight : bold; padding-top:8px;  width: 10%; height: 25px;" >
+                	 	<apex:outputText value="{!PGPD.OppName}"/>
+                 	</td>
+                 	<td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.PrevFYTotal}" />
+  						</apex:outputText>
+                 	</td>
+                	 <td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                          <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q1_Proj_Curr_FY}" />
+  						</apex:outputText>
+                  	
+               	     </td>
+                	 <td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                          <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q2_Proj_Curr_FY}" />
+  						</apex:outputText>
+                    	
+               		 </td>
+                	 <td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                          <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q3_Proj_Curr_FY}" />
+  						</apex:outputText>
+                     	
+                 	 </td>
+                 	 <td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                           <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q4_Proj_Curr_FY}" />
+  						</apex:outputText>
+                     	 
+                	 </td>
+                	 <td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                          <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Total_Proj_Curr_FY}" />
+  						</apex:outputText>
+                  	    
+                 	</td>
+                 	<td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q1_Pot_New_Ser}" />
+  						</apex:outputText>
+                    	                     </td>
+                 	<td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q2_Pot_New_Ser}" />
+  						</apex:outputText>
+                     
+                 	</td>
+                	 <td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                          <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q3_Pot_New_Ser}" />
+  						</apex:outputText>
+                    	
+                	 </td>
+                 	<td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q4_Pot_New_Ser}" />
+  						</apex:outputText>
+                    	    
+                 	</td>
+                 	<td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Total_Pot_New_Ser}" />
+  						</apex:outputText>
+                    	
+                 	</td> 
+                    <td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q1_Pot_Cur_FY}" />
+  						</apex:outputText>
+                     
+                 	</td>
+                 	<td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q2_Pot_Cur_FY}" />
+  						</apex:outputText>
+                    	  
+                 	</td>
+                 	<td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q3_Pot_Cur_FY}" />
+  						</apex:outputText>
+                   	   
+                 	</td>
+                 	<td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Q4_Pot_Cur_FY}" />
+  						</apex:outputText>
+                     	
+                 	</td> 
+                    <td align="center" style="padding-top:8px;  width: 10%; height: 25px;" >
+                         <apex:outputText value="{0, number,$ ###,###,###,##0.000}">
+   							 <apex:param value="{!PGPD.Total_Pot_Cur_FY}" />
+  						</apex:outputText>	  
+                    </td>
+      
+                </tr>   
+              </apex:repeat>
+            </table>   
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

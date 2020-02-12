@@ -1,0 +1,7 @@
+<apex:page showheader="false" sidebar="false">
+ 
+<script type="text/javascript"> 
+window.location="/00U/c?cType=1&cal=Tavant+Organization+Calendar&cal_lkid=02350000004LWgz&cal_lkold=Tavant+Organization+Calendar&cal_lspf=1&md0={!YEAR(TODAY())}&md1=2,getmonth"
+</script>
+ 
+</apex:page>

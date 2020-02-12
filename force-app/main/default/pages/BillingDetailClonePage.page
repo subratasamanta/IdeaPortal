@@ -1,0 +1,86 @@
+<!--
+* Description: This visualforce page displays a list of Billing Details records which are clones of a Billing Details record.
+* These multiple Billing Details records are then edited and saved to create multiple new Billing Details records at the same time.
+*-------------------------------------------------------------------------------------------------------
+*  Author                          Date                               Project         
+*  Shiwangi Jha                    2/21/2018                          Tavant Internal Sales 
+*-------------------------------------------------------------------------------------------------------
+* -->
+<apex:page id="page" standardController="Billing_Details__c" extensions="BillingDetailCloneExtension" tabstyle="Billing_Details__c" sidebar="false">
+    <apex:form id="form">
+        <apex:pageBlock id="block">
+            <apex:pageMessages id="showError"></apex:pageMessages>
+            <apex:pageBlockButtons id="blockButton">
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable id="blockTable" value="{!bdList}" var="clone">
+ 
+                <!-- Multiple clones of Billing Details record are displayed here in the list. -->                
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.Opportunity_Name__c.Label}">
+                    <apex:outputField value="{!clone.Opportunity_Name__c}"/>
+                </apex:column>  
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.Month__c.Label}">
+                    <apex:inputField value="{!clone.Month__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.Year__c.Label}">
+                    <apex:inputField value="{!clone.Year__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.BILLING_FORECAST__c.Label}">
+                    <apex:inputField id="billForecastId" value="{!clone.BILLING_FORECAST__c}" onkeyup="CopyValue('{!$Component.billForecastId}', '{!$Component.billLikelyId}', '{!$Component.billExpectedId}');"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.BILLING_LIKELY__c.Label}">
+                    <apex:inputField id="billLikelyId" value="{!clone.BILLING_LIKELY__c}" onkeyup="CopyValue2('{!$Component.billLikelyId}', '{!$Component.billExpectedId}');"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.BILLING_EXPECTED__c.Label}">
+                    <apex:inputField id="billExpectedId" value="{!clone.BILLING_EXPECTED__c}"/>
+                </apex:column>                
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.Billing_Expected_Comments__c.Label}">
+                    <apex:inputField value="{!clone.Billing_Expected_Comments__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.BILLING_ACTUAL__c.Label}">
+                    <apex:inputField value="{!clone.BILLING_ACTUAL__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.Comments__c.Label}">
+                    <apex:inputField value="{!clone.Comments__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.Actual_Invoice_Date__c.Label}">
+                    <apex:inputField value="{!clone.Actual_Invoice_Date__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.Actual_Invoice_Number__c.Label}">
+                    <apex:inputField value="{!clone.Actual_Invoice_Number__c}"/>
+                </apex:column>
+                <apex:column headerValue="{!$ObjectType.Billing_Details__c.Fields.Locked__c.Label}">
+                    <apex:inputField value="{!clone.Locked__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        <script> 
+        
+        
+        function CopyValue(FromId, ToId1, ToId2)
+        {   // On changing BILLING FORECAST value, BILLING LIKELY value and BILLING EXPECTED value changes simultaneously.
+            
+            if({!probability} >= 80){
+                document.getElementById(ToId1).value = document.getElementById(FromId).value;
+                document.getElementById(ToId2).value = document.getElementById(FromId).value;
+            }
+            
+            if({!probability} == 70){
+                document.getElementById(ToId1).value = document.getElementById(FromId).value;
+            }
+            
+        }
+        
+        function CopyValue2(FromIdn, ToIdn)
+        {	// On changing BILLING LIKELY value, BILLING EXPECTED value changes simultaneously.
+            
+            if({!probability} >= 80){
+                document.getElementById(ToIdn).value = document.getElementById(FromIdn).value;
+            }
+        } 
+        
+        </script>
+    </apex:form>
+</apex:page>

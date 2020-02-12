@@ -1,0 +1,64 @@
+<aura:component controller="ProductTeamController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!--<aura:attribute name="contactList" type="Contact" default="{'sobjectType': 'Contact',
+                                                                 'FirstName': '',
+                                                                 'LastName': '',
+                                                                 'Email': '', 
+                                                                 'Account.Name ': '',
+                                                                 'Phone': '',
+                                                                 'SelectEnquiryType__c': '',
+                                                                 'Description': ''    
+                                                                 }"/>-->
+    <aura:attribute name="email" type="string"/>
+    <aura:attribute name="subject" type="string"/>
+    <aura:attribute name="body" type="string"/>
+    <aura:attribute name="FirstName" type="string" />
+    <aura:attribute name="Phone" type="string" />
+    <aura:attribute name="Company" type="string" />
+    <aura:attribute name="mailStatus" type="boolean" default="false"/>
+    
+    <!--<aura:attribute name="newcontactList" type="contact[]"/>-->
+
+    <aura:if isTrue="{!v.mailStatus}">
+        <div role="alertdialog" tabindex="-1" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal--prompt">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header slds-theme--error slds-theme--alert-texture">
+                    <h2 class="slds-text-heading--medium" id="prompt-heading-id">{!$Label.c.Mail_Status}</h2>
+                </div>
+                <div class="slds-modal__content slds-p-around--medium">
+                    <div>
+                        <p>{!$Label.c.Email_Sent_successfully} {!v.email}</p>
+                    </div>
+                </div>
+                <div class="slds-modal__footer slds-theme--default">
+                    <button class="slds-button slds-button--brand" onclick="{!c.closeMessage}">Close</button>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </aura:if>
+    
+    <div class="slds-align_absolute-center" style="background-color: rgb(192, 223, 237); background-size: auto; background-attachment: fixed; background-position: center">
+        <div class="slds-form-element__control slds-col slds-size_5-of-12">
+            <h2 id="modal-heading-01" class="slds-text-heading_large slds-align_absolute-center " style="font-weight: 500; text-transform: uppercase;" >{!$Label.c.ContactUs}</h2>
+            <br/>
+            <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                <lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2 " type="text" label="First Name" name="First Name" required="true" value="{!v.FirstName}" /><br/>
+                <!--<lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2 " type="text" label="Last Name" name="Last Name" required="true" value="{!v.LastName}" />-->
+                <lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2"  type="email" name="Email" required="true"  label="Email Address" value="{!v.email}" /><br/>
+                <lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2"  type="Phone" label="Phone" name="Password" required="true" value="{!v.Phone}"  />
+                <lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2 " type="text" label="Company" name="Company" required="true"  value="{!v.Company}" /><br/>
+                <lightning:select class="slds-text-body_regular fontSize slds-size_1-of-2 " label="Select Enquiry Type" name="General" required="true"  value="{!v.subject}" >
+                    <option value="">{!$Label.c.ContactUs}</option>
+                    <option value="{!$Label.c.Business_Inquiry}">{!$Label.c.Business_Inquiry}</option>
+                    <option value="{!$Label.c.Partnership}">{!$Label.c.Partnership}</option>
+                    <option value="{!$Label.c.Media_and_Public_Relations}">{!$Label.c.Media_and_Public_Relations}</option>
+                    <option value="{!$Label.c.Others}">{!$Label.c.Others}</option>
+                </lightning:select>
+                <lightning:textarea class="slds-text-body_regular fontSize slds-size_1-of-1 " label="Your Message" name="textarea" required="true"  value="{!v.body}" />
+            </div>
+            <br/>
+            <lightning:button class="buttonSignUp" variant="Neutral" label="SEND" title="Send"  onclick="{!c.createRecord }" />
+        </div>
+    </div>
+    <br/>
+</aura:component>

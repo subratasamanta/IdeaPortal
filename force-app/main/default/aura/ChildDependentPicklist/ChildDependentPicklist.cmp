@@ -1,0 +1,55 @@
+<aura:component controller="IdeaController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="idea" type="Idea__c"/>
+     <aura:attribute  name="ideaList" type="Idea__c[]"/>
+       <aura:attribute name='IdeaDetails' Type='Idea__c'  default="{'sobjectType': 'Idea__c',
+                                                                'Name': '',
+                                                                'Idea_Objective__c': ' ',
+                                                                'Idea_Description__c': ' ',
+                                                                'Ideas__c':''
+                                                                }"/> 
+      <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:card title="{!ideaList.Name}" >
+                    <aura:set attribute="title">
+                        <a onclick="{!c.viewIdea}" class="slds-text-heading_medium"> {!ideaList.Name}  </a>
+                    </aura:set>
+                    
+                    <div class="slds-grid slds-gutters" >
+                      <!--    <div class="slds-col slds-size_2-of-3" > 
+                              <aura:if isTrue="{!idea.Idea_Description__c!=null}">
+                            <ui:outputRichText value="{!idea.Idea_Description__c}" class="bio" /> 
+                                <aura:set attribute="else">
+                                    No Description
+                                </aura:set>
+                            </aura:if>
+                            <br/>
+                            <div>
+                               <lightning:buttonIcon iconName="utility:comments" variant="border-filled" alternativeText="Comment" onclick="{!c.openComments}" /> &nbsp;
+                                <a onclick="{!c.openComments}" id="{!idea.Id}" >Comments</a>  Posted <a  href="javascript:void(0);" >{!idea.LastName__c} </a> on <ui:outputDateTime value="{!idea.CreatedDate}"/>
+                            </div>
+                        </div> --> 
+                        <div class="slds-col slds-size_1-of-3" > 
+                            <div class="slds-align_absolute-center" >
+                                <div class="slds-border_left" style="text-align: center; width: 15rem; margin-left: 200px; background-color: rgb(255, 255, 255); line-height: 100px; margin-top: -20px;">
+                                    <span>
+                                        <!--<lightning:buttonIcon iconName="utility:like" variant="border-filled" alternativeText="Vote" onclick="{!c.like}"/>   
+                                        <span >{!idea.Rating__c} Votes</span>
+                                        <lightning:buttonIcon iconName="utility:dislike" variant="border-filled" alternativeText="Vote" onclick="{!c.dislike}"/>-->
+                                        
+                                        <!--<span class="slds-avatar slds-avatar_circle">
+                                            <img alt="Person name" src="{!$Resource.FooterImages +'/icons/SocialNetworkIcons/twitter.png'}" title="Person name" />
+                                        </span>-->
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <aura:if isTrue="{!v.commentsSection}" >
+                          
+                            <div class="{!idea.id + '1'}" style="height:200px;">
+                                ashdabhsdbhadbvsvdjh
+                            </div>
+                        </aura:if>
+                    
+                </lightning:card>
+</aura:component>

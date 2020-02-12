@@ -1,0 +1,159 @@
+<aura:component  controller="ProductTeamController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="contactList" type="Contact_Us__c[]" default="{'sobjectType': 'Contact_Us__c',
+                                                                 'First_Name__c': '',
+                                                                 'Last_Name__c': '',
+                                                                 'Email__c': '',                                                                 
+                                                                 'Phone__c': '',
+                                                                 'Enquiry_Type__c': '',
+                                                                 'Description__c': '',
+                                                                 'Company__c': ''
+                                                                 }"/>
+    
+    <div class="slds-box slds-theme_default" style="padding-top: 0px;">
+        <!--<div>
+            <img  style="width: 150px; margin-top:-10px;}" src= "{!$Resource.TavantLogo}" />  &nbsp; &nbsp; &nbsp; 
+            <span class=" slds-var-p-around_xx-small"><a href="https://www.tavant.com/warranty-management" style="text-decoration:none; color: #000;font-size: 20px; text-align: right !important;text-transform: uppercase; padding-left: 1000px;">Warranty Product</a></span> &nbsp; &nbsp; &nbsp; 
+            <span class=" slds-var-p-around_xx-small"><a href="https://www.tavant.com/product-registration" style="text-decoration:none; color: #000; text-align: right !important; text-transform: uppercase; font-size: 20px;">Product Registration</a></span>
+        </div>-->
+        <div class="slds-align_absolute-center" style="display: block;
+                                                       background-color: #c95202; 
+                                                       background-size: auto; 
+                                                       background-attachment: fixed;
+                                                       background-position: center;
+                                                       font-size: 35px;
+                                                       color: #fff;
+                                                       font-weight:700;
+                                                       text-transform: uppercase;
+                                                       width:1730px;
+                                                       margin-left: -17px;
+                                                       text-align: center !important;
+                                                       height:120px;
+                                                       line-height: 3.1;
+                                                       font-family: 'Open Sans', sans-serif !important;;">{!$Label.c.ContactUs}</div>
+        <div style="padding-left: 310px;margin-top: 40px;margin-bottom: 40px;">
+            <span class=" slds-var-p-around_xx-small"><a href="/tavantcustomerportal/s" style="text-decoration:none">Home</a></span> &frasl;
+            <span class=" slds-var-p-around_xx-small"><a href="/tavantcustomerportal/s/contactus" style="text-decoration:none">{!$Label.c.ContactUs}</a></span>
+        </div>
+        
+        <div class="slds-grid slds-gutters slds-align_absolute-center" style="border-bottom: 1px solid #d4d4d4; margin-left: 300px; margin-right: 300px;}">
+            <div class="slds-col" >
+                <div class="Heading" Style=" font-size: 20px; font-family: inherit;">Business <br/></div> 
+                <div class="subHeading" Style=" font-size: 15px; color:#f68e37; font-family: inherit;"><a href="mailto:hello@tavant.com" style="color:#f68e37;">hello@tavant.com</a> </div>
+            </div>
+            <div class="slds-col" >
+                <div class="Heading" Style=" font-size: 20px; font-family: inherit;">  Media <br/></div>
+                <div class="subHeading" Style=" font-size: 15px; color:#f68e37; font-family: inherit;"> <a href="mailto:hello@tavant.com" style="color:#f68e37;">press@tavant.com</a> </div>
+            </div>
+            <div class="slds-col" >
+                <div class="Heading" Style=" font-size: 20px;"> Careers <br/></div>
+                <div class="subHeading" Style=" font-size: 15px; color:#f68e37; font-family: inherit;"> <a href="mailto:hello@tavant.com" style="color:#f68e37;">careers@tavant.com</a></div>
+            </div>
+        </div>
+        
+        <div class="slds-align_absolute-center" style="margin-left: 310px; margin-right: 300px; border-bottom: 1px solid #d4d4d4;">
+            <div class="slds-col" style="margin-top: 25px;">
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;"> Santa Clara<br/></div>
+                <pre  style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.SantaClara}</pre>
+            </div>
+            <div class="slds-col" style="margin-top: -75px;     margin-left: -60px;" >
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;">  New Jersey<br/></div>
+                <pre  style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.NewJersey}</pre>
+            </div>
+            <div class="slds-col" style="margin-top: -95px;">
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;"> Dallas<br/></div>
+                <pre style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.Dallas}</pre>
+            </div>
+        </div>
+        
+        <div class="slds-align_absolute-center" style="margin-left: 310px; margin-right: 300px; border-bottom: 1px solid #d4d4d4;">
+            <div class="slds-col"  >
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;"> Indianapolis<br/></div>
+                <pre  style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.Indianapolis}</pre>
+            </div>
+            <div class="slds-col" > 
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;">  London<br/></div>
+                <pre  style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.London}</pre>
+            </div>
+            <div class="slds-col" >
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;"> Colombia<br/></div>
+                <pre style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.Colombia}</pre>
+            </div>
+        </div>
+        
+        <div class="slds-align_absolute-center" style="margin-left: 310px; margin-right: 300px; border-bottom: 1px solid #d4d4d4;">
+            <div class="slds-col" >
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;"> Solihull<br/></div>
+                <pre  style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.Solihull}</pre>
+            </div>
+            <div class="slds-col" >
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;">  Bangalore<br/></div>
+                <pre  style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.BangaloreAdress}</pre>
+            </div>
+            <div class="slds-col" >
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;"> Noida<br/></div>
+                <pre style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.NoidaAddress}</pre>
+            </div>
+        </div>
+        
+        <div class="slds-align_absolute-center" style="margin-left: 310px; margin-right: 300px; ">
+            <div class="slds-col" >
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;"> Hyderabad<br/></div>
+                <pre  style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.HyderabadAddress}</pre>
+            </div>
+            <div class="slds-col" >
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;">  Tokyo<br/></div>
+                <pre  style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.Tokyo}</pre>
+            </div>
+            <div class="slds-col" >
+                <div class="" Style=" font-size: 20px; color:#f68e37; font-family: inherit;"> Australia<br/></div>
+                <pre style="font-family: inherit; color:#333333;font-size: 14px;font-weight: 400;line-height: 24px;">{!$Label.c.Australia}</pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slds-align_absolute-center" style="background:linear-gradient(to right, #ef853c 0%,#ee6c46 100%);background-attachment: fixed;background-position: center; text-transform: uppercase;height: 534px;
+                                                   margin-bottom: -60px; padding-top: 60px; padding-bottom: 60px;">
+        <div class="slds-col slds-size_5-of-12" style="width:535px; margin-top: 180px;">
+            <h2 id="modal-heading-01" class="slds-text-heading_large " style="font-weight: 500;color: #fff; font-family:inherit; margin-top: -240px; padding-bottom: 100px;" >CLIENT SPEAK</h2>
+            <span>
+                <lightning:carousel disableAutoRefresh="false" disableAutoScroll="false">
+                    <lightning:carouselImage
+                                             src = "/docs/component-library/app/images/examples/carousel-01.png"
+                                             header = ""
+                                             description = "If I need to develop software that provides a unique competitive advantage to my business, Tavant is the first company I consult with."
+                                             alternativeText = ""
+                                             href = "https://www.salesforce.com">
+                    </lightning:carouselImage>
+                    <lightning:carouselImage
+                                             src = "/docs/component-library/app/images/examples/carousel-02.png"
+                                             header = ""
+                                             description = "avant VELOX suite of products will provide the flexibility, scale and a streamlined customer experience that is essential for our business."
+                                             alternativeText = ""
+                                             href = "https://www.salesforce.com">
+                    </lightning:carouselImage>
+                </lightning:carousel>
+            </span>
+        </div>
+        <div class="slds-form-element__control slds-col slds-size_5-of-12" style="margin-left: 75px;">
+            <h2 id="modal-heading-01" class="slds-text-heading_large " style="font-weight: 500;color: #fff; font-family:inherit;" >{!$Label.c.ContactUs}</h2>
+            <br/>
+            <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                <lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2 " type="text" label="First Name" name="First Name" required="true" value="{!v.contactList.First_Name__c}" /><br/>
+                <lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2 " type="text" label="Last Name" name="Last Name" required="true" value="{!v.contactList.Last_Name__c}" />
+                <lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2"  type="email" name="Email Address" required="true"  label="Email Address" value="{!v.contactList.Email__c}" /><br/>
+                <lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2"  type="Phone" label="Phone" name="Phone" required="true" value="{!v.contactList.Phone__c}"  />
+                <lightning:input class="slds-text-body_regular fontSize slds-size_1-of-2 " type="text" label="Company" name="Company" required="true"  value="{!v.contactList.Company__c}" /><br/>
+                <lightning:select class="slds-text-body_regular fontSize slds-size_1-of-2 " label="Select Enquiry Type" name="General" required="true"  value="{!v.contactList.Enquiry_Type__c}" >
+                    <option value="">Choose One</option>
+                    <option value="{!$Label.c.Business_Inquiry}">{!$Label.c.Business_Inquiry}</option>
+                    <option value="{!$Label.c.Partnership}">{!$Label.c.Partnership}</option>
+                    <option value="{!$Label.c.Media_and_Public_Relations}">{!$Label.c.Media_and_Public_Relations}</option>
+                    <option value="{!$Label.c.Others}">{!$Label.c.Others}</option>
+                </lightning:select>
+                <lightning:textarea class="slds-text-body_regular fontSize slds-size_1-of-1 " label="Your Message" name="textarea" required="true"  value="{!v.contactList.Description__c}" />
+            </div>
+            <br/>
+            <lightning:button class="buttonSignUp" variant="Neutral" label="Get in Touch" title="Send"  onclick="{!c.GetInTouch }" />
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,2 @@
+<apex:page standardController="Sales_Marketing_Data_Form__c" recordSetVar="a" 
+action="{!URLFOR($Action.Sales_Marketing_Data_Form__c.List,$ObjectType.Sales_Marketing_Data_Form__c)}" />

@@ -1,0 +1,64 @@
+<aura:component controller="IdeaController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="ideaList" type="Idea__c"/>
+        <aura:attribute name="wrapRecord" type="IdeaController.WrapIdeasWithComments[]"/>
+
+    <aura:attribute name="recordId" type="Id" /> 
+    <aura:attribute name="index" type="string" />
+    <aura:attribute name="commentsSection" type="Boolean" default="" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div style="height:200px; background:white;">
+        
+    </div>
+   <!-- <aura:iteration items="{!v.wrapRecord.objIdeaRecord}"  var ="item" indexVar="key">-->
+        <div style="height:200px;">
+        
+        {!v.wrapRecord.objIdeaRecord.Name}
+        </div>
+        <lightning:card title="{!v.wrapRecord.objIdeaRecord.Name}" >
+            <aura:set attribute="title">
+                <a onclick="{!c.viewIdea}" class="slds-text-heading_medium" id="{!v.wrapRecord.objIdeaRecord.Id}"> {!v.wrapRecord.objIdeaRecord.Name}  </a>
+            </aura:set>
+            
+            <div class="slds-grid slds-gutters" >
+                <div class="slds-col slds-size_2-of-3" > 
+                    <aura:if isTrue="{!v.wrapRecord.objIdeaRecord.Idea_Description__c !=null}">
+                        <ui:outputRichText value="{!v.wrapRecord.objIdeaRecord.Idea_Description__c}" class="bio" />   
+                        <aura:set attribute="else">
+                            No Description
+                        </aura:set>
+                    </aura:if>
+                    <br/>
+                    <div>
+                        <!--<lightning:buttonIcon iconName="utility:comments" variant="border-filled" alternativeText="Comment" onclick="{!c.openComments}"  tabindex="{!v.wrapRecord.objIdeaRecord.Id}" /> -->
+                        <a onclick="{!c.openComments}" id="{!v.wrapRecord.objIdeaRecord.Id}" >Comments</a>  Posted <a  href="javascript:void(0);" >{!v.wrapRecord.objIdeaRecord.LastName__c} </a> on <ui:outputDateTime value="{!v.wrapRecord.objIdeaRecord.CreatedDate}"/>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-3" > 
+                    <div class="slds-align_absolute-center" >
+                        <div class="slds-border_left" style="text-align: center; width: 15rem; margin-left: 200px; background-color: rgb(255, 255, 255); line-height: 100px; margin-top: -20px;">
+                            <span>
+                                <lightning:buttonIcon iconName="utility:like" variant="border-filled" alternativeText="Vote" onclick="{!c.like}"/>   
+                                <span >{!v.ideaList.Rating__c} Votes</span>
+                                <lightning:buttonIcon iconName="utility:dislike" variant="border-filled" alternativeText="Vote" onclick="{!c.dislike}"/>
+                                
+                               <span class="slds-avatar slds-avatar_circle">
+                                            <img alt="Person name" src="{!$Resource.FooterImages +'/icons/SocialNetworkIcons/twitter.png'}" title="Person name" />
+                                        </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <aura:iteration items= "{!v.wrapRecord.lstComents}" var="comment">
+                  <aura:if isTrue="{!v.commentsSection}">
+                <div class="{!if(v.commentsSection == 'show','slds-show','slds-hide')}" aura:id="{!idea.id}">
+                  sadasdsdsadsa
+                </div>
+            </aura:if>
+            </aura:iteration>
+          
+            
+        </lightning:card>
+ 
+</aura:component>

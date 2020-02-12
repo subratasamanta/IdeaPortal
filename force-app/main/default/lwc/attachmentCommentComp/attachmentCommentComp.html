@@ -1,0 +1,10 @@
+<template>    
+        <div style="margin-left:4%">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col"><lightning-input style="bottom: 40px" label="" name="file uploader" onchange={handleFilesChange} type="file" multiple></lightning-input></div>
+                <div class="slds-col"><lightning-button label='Upload' style="height: 28px" onclick={handleSave} variant="brand"></lightning-button></div>    
+            </div>           
+            <br/>
+            <div class="slds-text-body_small slds-text-color_error">{fileName}</div>                        
+        </div>    
+</template>

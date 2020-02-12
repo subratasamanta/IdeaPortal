@@ -1,0 +1,51 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global"
+                controller="listViewControllerHari">
+     
+    <aura:attribute type="listViewController.WrapCaseWithCaseItems" name="acctList"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="linkView" type="Boolean" default="false"/>
+    
+    <aura:attribute type="Case[]" name="acctList1"/>
+    <aura:attribute name="selTabId" type="String" default="" />
+     
+    <aura:handler name="init" value="{!this}" action="{!c.fetchAcc}"/>
+    <lightning:layout >
+        <lightning:layoutItem size="10"/>  
+        <lightning:layoutItem size="2">
+            <lightning:button variant="brand" label="Add Case" title="Brand action" onclick="{! c.openComments }" />
+        </lightning:layoutItem>
+    </lightning:layout> 
+    <lightning:tabset onselect="{!c.tabSelected}" selectedTabId="{!v.selTabId}">
+        <lightning:tab aura:id="AllCases" id="AllCases" label="All Cases" title="All Cases" tabindex="1">
+            <lightning:datatable data="{! v.acctList1 }"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+        </lightning:tab>
+        <lightning:tab aura:id="Submitted" id="Submitted" label="Submitted Cases" title="Submitted Cases" tabindex="2">
+            <lightning:datatable data="{! v.acctList1 }"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+        </lightning:tab>
+        <lightning:tab aura:id="Draft" id="Draft" label="Draft Cases" title="Draft Cases" tabindex="3">
+            <lightning:datatable data="{! v.acctList1 }"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+        </lightning:tab>
+          <lightning:tab aura:id="Close" id="Close" label="Closed Cases" title="Closed Cases" tabindex="4">
+            <lightning:datatable data="{! v.acctList1 }"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+        </lightning:tab>
+          <lightning:tab aura:id="In progress" id="In progress" label="In Progress Cases" title="In Progress Cases" tabindex="5">
+            <lightning:datatable data="{! v.acctList1 }"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+        </lightning:tab>
+    </lightning:tabset>
+</aura:component>

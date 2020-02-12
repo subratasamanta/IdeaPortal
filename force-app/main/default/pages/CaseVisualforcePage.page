@@ -1,0 +1,26 @@
+<apex:page standardController="Case" showHeader="false" sidebar="false">
+    <div id="lightning" />
+    <apex:includeLightning />     
+    <script>    
+    var siteId = '{!$Site.SiteId}';   
+    var claimId = '{!Case.Id}';
+    alert(claimId);
+    var pageUrl = '';
+    if(siteId == '') {
+        if(claimId != undefined && claimId != '' && claimId != null) {
+            pageUrl = '/lightning/cmp/c__CaseComponent?claimId='+claimId;
+        }else {
+            pageUrl = '/lightning/cmp/c__CaseComponent';
+        }
+        window.open(pageUrl, '_self'); 
+    }else {
+        if(claimId != undefined && claimId != '' && claimId != null) {
+            pageUrl = '/dealer/s/casecreation?claimId='+claimId;
+        }else {
+           pageUrl = '/dealer/s/casecreation';
+        }
+        window.open(pageUrl, '_parent'); 
+    }
+    </script>
+    
+</apex:page>

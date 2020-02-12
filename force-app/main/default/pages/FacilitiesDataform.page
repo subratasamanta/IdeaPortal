@@ -1,0 +1,2 @@
+<apex:page standardController="Facilities_Data_Form__c" recordSetVar="a" 
+action="{!URLFOR($Action.Facilities_Data_Form__c.List,$ObjectType.Facilities_Data_Form__c)}" />

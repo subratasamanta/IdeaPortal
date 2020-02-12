@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <pre>
+        Hello! <br/>       
+        This is Component 2<br/>   
+    </pre>     
+    <lightning:button variant="brand" label="Go to Component 1" onclick="{!c.NavigatetoC1}" />
+  
+
+</aura:component>

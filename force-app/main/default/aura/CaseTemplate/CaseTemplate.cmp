@@ -1,0 +1,66 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global"
+                controller="listViewController">
+     
+    <aura:attribute type="listViewController.WrapCaseWithCaseItems" name="acctList"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="linkView" type="Boolean" default="false"/>
+     
+    <aura:handler name="init" value="{!this}" action="{!c.fetchAcc}"/>
+    <lightning:layout >
+        <lightning:layoutItem size="10"/>  
+        <lightning:layoutItem size="2">
+            <lightning:button variant="brand" label="Add Case" title="Brand action" onclick="{! c.openComments }" />
+        </lightning:layoutItem>
+    </lightning:layout> 
+    <div class="slds-m-around_xx-large">
+        <h1 class="slds-text-heading--medium">Cases</h1>
+        <br/>
+        <!--Contact List Table-->
+        <table class="slds-table slds-table--bordered slds-table--cell-buffer" role="grid">      
+            <thead>  
+                <tr class="slds-text-title--caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Button">Link</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Id">Id</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Subject">Subject</div>
+                    </th>
+                    
+                    <th scope="col">
+                        <div class="slds-truncate" title="Status">Status</div>
+                    </th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>        
+                <aura:iteration items="{!v.acctList}" var="con" indexVar="index">
+                    <tr>
+                        <th scope="row">
+                            <aura:if isTrue="{!con.objCaseRecord.Status != 'Draft'}">
+                                <a id="{!con.objCaseRecord.Id}" style="color:darkgreen;" href="javascript:void(0);" onclick="{! c.openComments }" data-mode="View">View</a>
+                                <aura:set attribute="else">
+                                    <a id="{!con.objCaseRecord.Id}" style="color:blue;" href="javascript:void(0);" onclick="{! c.openComments }" data-mode="Edit">Edit</a>
+                                </aura:set>
+                            </aura:if>
+                        </th>
+                        <th scope="row">
+                            <div class="slds-truncate" title="{!con.objCaseRecord.Id}">{!con.objCaseRecord.Id}</div>
+                        </th>
+                        <td>
+                            <div class="slds-truncate" title="{!con.objCaseRecord.Subject}">{!con.objCaseRecord.Subject}</div>
+                        </td>
+                        <th scope="row">
+                            <div class="slds-truncate" title="{!con.objCaseRecord.Status}">{!con.objCaseRecord.Status}</div>
+                        </th>
+                        
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

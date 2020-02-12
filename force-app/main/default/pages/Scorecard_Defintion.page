@@ -1,0 +1,19 @@
+<apex:page controller="FormConroller">
+<apex:form style="width:700px">
+ <apex:pageBlock title="Add Scorecard">
+   <apex:pageBlockButtons location="bottom">
+     <apex:commandButton action="{!save}" value="Save" style="width:100px" />
+     <apex:commandButton action="{!SaveAndNew}" value="Save & New" style="margin-left:10px;width:100px;" />
+   </apex:pageBlockButtons>
+ <apex:pageBlockSection showHeader="true" columns="2">
+    <apex:inputField value="{!scoreform.Name}" required="true"/>
+    <apex:inputField value="{!scoreform.Department__c}" required="true"/>
+    <apex:inputField value="{!scoreform.Sub_Department__c}" required="true"/>   
+    <apex:inputField value="{!scoreform.Frequency__c}" required="true"/>
+    <apex:inputField value="{!scoreform.Weighted_Score_1_Owner__c}" />
+    <apex:inputField value="{!scoreform.Weighted_Score_2_Owner__c}" />       
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

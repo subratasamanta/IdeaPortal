@@ -1,0 +1,19 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" 
+                access="global" controller="testServerCls">
+    <aura:attribute name="upVoteButtonState" type="Boolean" default="false"/>
+    <aura:attribute name="downVoteButtonState" type="Boolean" default="false"/>
+    <aura:attribute name="upVoteCount" type="String" default="0"/>
+    <aura:attribute name="downVoteCount" type="String" default="0"/>
+    <aura:attribute name="usrId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <h1>{!v.usrId}</h1>
+    <lightning:buttonStateful state="{! v.upVoteButtonState }" variant="text"
+                              labelWhenOff="Like" labelWhenOn="Liked" iconNameWhenOff="utility:like"
+                              iconNameWhenOn="utility:like" onclick="{! c.onUpVote }" /> {!v.upVoteCount}
+    
+    <lightning:buttonStateful state="{! v.downVoteButtonState }" variant="text"
+                              labelWhenOff="Dislike" labelWhenOn="Disliked" iconNameWhenOff="utility:like"
+                              iconNameWhenOn="utility:like" onclick="{! c.onDownVote }" /> {!v.downVoteCount}
+    
+    
+</aura:component>

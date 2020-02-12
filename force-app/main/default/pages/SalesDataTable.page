@@ -1,0 +1,114 @@
+<apex:page controller="ScoreCardController"  sidebar="false">
+<style>
+.hide{
+display:none;
+}
+</style>
+<apex:form style="float:right;width:45%;margin-right:2%;">
+<apex:iframe src="/01Z50000000iZUK?isdtp=lt" /></apex:form>
+<apex:form style="float:left;width:50%;margin-left:2%;">
+<div class="{!hideshow}">
+<apex:pageBlock title="Scorecard">
+<apex:pageBlockTable style="width:100%"  value="{!scorecard}" var="score">
+ <apex:column headerValue="Name" style="width:150px" >
+ <apex:outputField value="{!score.Name}"/></apex:column>
+ <apex:column headerValue="Sub Department" style="width:150px" ><apex:outputField value="{!score.Sub_Department__c}"/></apex:column>
+ <apex:column >
+  <apex:facet name="header">Action</apex:facet>
+ <apex:commandLink action="{!scorecardClicked}">
+  <apex:param name="selectedScorecard" value="{!score.Id}"/>Create Instance</apex:commandLink>
+ </apex:column>
+</apex:pageBlockTable>
+</apex:pageBlock>
+</div>
+ <apex:pageBlock title="Filters" mode="edit" id="criteria">
+    <script type="text/javascript">      
+       window.onload = doSearch;
+       function doSearch(){
+        searchServer(document.getElementById("month").value,document.getElementById("year").value,document.getElementById("category").value);
+       }
+       var month = new Array("January","February","March","April","May","June","July","August","September","October","November","December","Jan-Mar","Apr-Jun,","Jul-Sept","Oct-Dec","Jan-Jun","Jul-Dec","Jan-Dec");
+       var year  = new Array("2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030");
+       today     = new Date();
+       thismonth = today.getMonth();
+       thisyear  = today.getFullYear();
+  </script> 
+  <apex:actionFunction name="searchServer" action="{!runSearch}" rerender="results,debug,errors" status="status" reRender="results">
+    <apex:param name="month" value="" />
+    <apex:param name="year" value="" />
+    <apex:param name="category" value="" />
+  </apex:actionFunction>
+<table cellpadding="2" cellspacing="2">
+   <tr>
+    <td style="font-weight:bold;float:left;width:60px;">Year<br/>
+          <select id="year" onchange="doSearch();">
+              <option value="" selected="selected">All</option>
+              <apex:repeat value="{!years}" var="year">
+              <option value="{!year}">{!year}</option>
+              </apex:repeat>
+          </select>
+      </td><script type="text/javascript"> 
+     document.getElementById('year').value =  thisyear;</script>
+      
+      <td style="font-weight:bold;float:left;width:140px;">Month<br/>
+          <select id="month" onchange="doSearch();">
+              <apex:repeat value="{!months}" var="month">
+              <option value="{!month}">{!month}</option>
+              </apex:repeat>
+          </select>
+      </td><script type="text/javascript"> 
+     document.getElementById('month').value =  month[thismonth];</script>
+      <td style="font-weight:bold;float:left;width:142px;">Sub Department<br/>
+          <select id="category" onchange="doSearch();" onLoad="doSearch();">
+              <apex:repeat value="{!categories1}" var="category">
+              <option value="{!category}">{!category}</option>
+              </apex:repeat>  
+       </select>
+      </td>
+     </tr>
+      <!--<tr><td style="font-weight:bold;text-align: center;">OR</td>   </tr>
+    <tr><td style="font-weight:bold;">Search by Keyword<br/>
+         <apex:inputText id="searchText" value="{!searchText}"/>
+         <apex:commandButton value="Search" action="{!runSearch2}" reRender="results"/>
+     </td>
+   </tr>-->
+</table>
+</apex:pageBlock>
+<apex:pageBlock title="Instance">
+ <div><b><apex:actionStatus startText="fetching..." id="status" /></b></div>
+<table width="100%" border="0">
+  <tr>  
+    <td valign="top">
+<apex:pageBlock mode="edit" id="results">
+<apex:pageBlockTable value="{!scorecardinstance}" var="score">
+ <apex:column headerValue="Instance Name">
+ <apex:outputField value="{!score.Name}"/></apex:column>
+ <apex:column headerValue="Status">
+  <apex:outputField value="{!score.Status__c}"/>
+ </apex:column>
+ <apex:column styleClass="{!hodview}" >
+ <apex:repeat value="{!score.Status__c}" var="statuskey" >
+    <apex:repeat value="{!vieweditmap[statuskey]}" var="statusvalue" >
+ <apex:commandbutton action="{!instanceClicked}" value="{!statusvalue}" rerender="popup" immediate="true">
+  <apex:param name="selectedInstanceScorecard" value="{!score.Id}"/>
+  </apex:commandbutton>
+   </apex:repeat>
+</apex:repeat> 
+ </apex:column>  
+<apex:column width="20%" >
+    <apex:repeat value="{!score.Status__c}" var="key2">
+    <apex:repeat value="{!statusmap[key2]}" var="status">
+ <apex:commandbutton action="{!instanceClickedForReview}" value="Review" rendered="{!status}" rerender="popup" immediate="true">
+  <apex:param name="selectedInstanceScorecard" value="{!score.Id}"/>
+  </apex:commandbutton>
+   </apex:repeat>
+</apex:repeat> 
+ </apex:column>
+</apex:pageBlockTable>
+</apex:pageBlock>
+   </td>
+  </tr>
+</table>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

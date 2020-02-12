@@ -1,0 +1,292 @@
+<aura:component controller="IdeaController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="backgroundImageURL" type="String" />
+    <aura:attribute name="IdeaId" type="String"/>
+    <aura:attribute name="isCommunity" type="Boolean" default="true"/>
+    <aura:attribute name="displayView" type="Boolean" default="false"/>
+    <aura:attribute name="NewCommentsStr" type="String"/>
+    <aura:attribute name="wrapIdea" type="IdeaController.WrapIdeasWithComments"/>
+    <aura:attribute access="public" name="loggedInUser" type="Id" description="loggedInUser Id" />
+    <aura:attribute access="public" name="voteReocrd" type="object" description="Idea Record Id" />
+    <aura:attribute name="upvoteStyle" type="string" default="" />
+    <aura:attribute name="downvoteStyle" type="string" default="" />
+    <aura:attribute name="showUpvote" type="Boolean" default="true" />
+    <aura:attribute name="showDownvote" type="Boolean" default="true" />
+    <aura:attribute name="isShowRichText" type="Boolean" default="true"/>
+    <aura:attribute name="isUpvoted" type="Boolean" default="false" />
+    <aura:attribute name="isDownvoted" type="Boolean" default="false" />
+    <aura:attribute name="selectedValue" type="string" default=""/>
+    <aura:attribute name="ShowSortedNewComments" type="Boolean" default="true" />
+    <aura:attribute name="ShowSortedOldComments" type="Boolean" default="false" />
+    <aura:attribute name="lstComments" type="Comment__c[]"/>
+    <aura:attribute name="ShowStatusClosed" type="Boolean" default="false" />
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:attribute name="onloadSpinner" type="boolean" default="false"/>
+    <aura:attribute name="TotalDays" type="Date"/>
+    <aura:attribute name="idea" type="Idea__c[]"/>
+    <aura:attribute name="disableButtons" type="boolean" default="false" />
+    <aura:attribute name="ideaStatusOptions" type="string" default="" />
+    
+    <aura:attribute name="fileName" type="string" default="" description="Used to hold file name for attchment"/>
+    <aura:attribute name="fileContent" type="string" default="" description="Used to hold file content for attchment"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    
+    
+    <aura:if isTrue="{!v.displayView}">
+        <div class="slds-p-horizontal_xx-large slds-is-relative" style="{!'background:' + v.backgroundColor + ' url(' + v.backgroundImageURL +') repeat;background-position: center;'}">
+            <lightning:layout >
+                <lightning:layoutItem size="2"/>
+                <lightning:layoutItem padding="around-small" size="2">
+                    <div>
+                        <aura:if isTrue="{!v.isCommunity}">
+                            <a href="javascript:void(0);" onclick="{!c.redirectToAllIdeas}" class="allIdeaClass">{!$Label.c.All_Ideas}</a>
+                        </aura:if>
+                        <p class="ideaDetClass">{!$Label.c.Idea_Details}</p>
+                    </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="4" padding="around-small">
+                    <div class="slds-float_right">
+                        <aura:if isTrue="{!v.showUpvote}">
+                            <lightning:button class="upvoteFocus" variant="neutral" label="Upvote" iconName="utility:like" aura:id="upvote" onclick="{!c.upvote}" disabled="{!v.disableButtons}" /> 
+                        </aura:if>
+                        <aura:if isTrue="{!v.showDownvote}">
+                            <lightning:button  class="downvoteFocus"  variant="neutral" label="Downvote" iconName="utility:dislike" aura:id="downvote" onclick="{!c.downvote}" disabled="{!v.disableButtons}" />
+                        </aura:if>
+                        <aura:if isTrue="{!v.isUpvoted}">
+                            <lightning:button class="upvoted" variant="neutral" label="Upvoted" iconName="utility:like" aura:id="upvoted"  /> 
+                        </aura:if>
+                        <aura:if isTrue="{!v.isDownvoted}">
+                            <lightning:button class="downvoted" variant="neutral" label="Downvoted" iconName="utility:dislike" aura:id="downvoted"  /> 
+                        </aura:if>
+                         <!-- <aura:if isTrue="{!v.disableButtons}">
+                            <lightning:button class="upvoteFocus" variant="neutral" label="Upvoted" iconName="utility:like" aura:id="upvoted" disabled="true" /> 
+                       
+                            <lightning:button class="downvoteFocus" variant="neutral" label="Downvoted" iconName="utility:dislike" aura:id="downvoted" disabled="true" /> 
+                        </aura:if>-->
+                    </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="2" padding="around-small">
+                    <!--<lightning:button class="slds-float_right slds-p-right_x-large" variant="brand" label="Post an Idea" iconName="utility:light_bulb" aura:id="Popular-Ideas" onclick="" />-->
+                  <!--  <lightning:button class="closeIdea" variant="neutral" label="Close Idea"  aura:id="closeIdea" onclick="{!c.closeIdea}"  /> -->
+                    <span  class="buttonPostIdea">
+                        <c:CreateIdea />
+                    </span>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="2" padding="around-small" />
+            </lightning:layout>
+            <div class="slds-grid slds-gutters slds-border_bottom " style="margin-right:19.25rem;margin-left:19.25rem;margin-top:-30px;" />
+            <lightning:layout>
+                <lightning:layoutItem size="2"/>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <lightning:card  class="overDiv">
+                        <aura:set attribute="title">
+                            <p  class="ideaTitle" > {!v.wrapIdea.objIdeaRecord.Name}  </p>
+                        </aura:set>
+                        <i><p class="mainIdea"><lightning:formattedText value="{!v.wrapIdea.objIdeaRecord.SubIdeas__c}"/></p></i><br/>
+                        <!--<p class="slds-p-horizontal_small"><lightning:formattedRichText value="{!v.wrapIdea.objIdeaRecord.Idea_Description__c}" class="slds-has-flexi-truncate"/></p>-->
+                        <div class="slds-p-left_medium " >
+                            <aura:if isTrue="{!v.wrapIdea.objIdeaRecord.Idea_Description__c!=null}">
+                                <span class="slds-p-left_medium"><lightning:formattedRichText value="{!v.wrapIdea.objIdeaRecord.Idea_Description__c}" class="slds-has-flexi-truncate" /></span>
+                                <aura:set attribute="else">
+                                    <span class="slds-p-left_small"> {!$Label.c.No_Description}</span>
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                        <br/> <br/>
+                        <aura:if isTrue="{!v.isShowRichText}">
+                            <div class="slds-box slds-m-around_medium slds-theme-default slds-is-relative">
+                                <h2 class="addComment">{!$Label.c.Add_Your_Comment}</h2>
+                                <div class="slds-grid slds-gutters" >
+                                   <!-- <div class="slds-col slds-size_1-of-12" > 
+                                        <lightning:avatar variant="circle"  class="slds-avatar slds-avatar_profile-image-medium" size="large" />  
+                                    </div>-->
+                                    <div class="slds-col slds-size_12-of-12 slds-m-left_x-small" > 
+                                        <lightning:inputRichText value="{!v.NewCommentsStr}" aura:id="editTextarea"   disabledCategories="FORMAT_FONT"
+                                                                 formats="['font', 'size','bold', 'italic', 'underline',  'strike', 'list', 'indent', 'align',
+                                                                          'clean', 'table', 'header', 'color','background','color','code','script']" >
+                                           <!-- <lightning:insertImageButton aura:id="image"/>-->
+                                        </lightning:inputRichText>
+                                    </div>
+                                </div>
+                                <br/> <br/><br/>
+                                <lightning:layout>
+                                <lightning:layoutItem  >
+                                <div class="custom-box">
+                          <!--      <c:attachmentCommentComp onvaluechange="{!c.fetchFiledetils}"/> --></div>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem alignmentBump="left">
+                               <!--> <div class="slds-p-around_xx-medium" style="float:right; margin-top:-20px;"> -->
+                                   <div>
+                                <lightning:button tabindex="{!index}" aura:id="saveComment" variant="brand" label="Comment"  onclick="{!c.saveLatestComment}" disabled="{!v.disabled}"/>
+                                </div>
+                                </lightning:layoutItem  >
+                                </lightning:layout>
+                                <aura:if isTrue="{!v.spinner}">
+                                    <div class="slds-spinner_container" aura:id="uploadSpinner">
+                                        <div class="slds-spinner--brand slds-spinner slds-spinner--small" aria-hidden="false" role="alert">
+                                            <div class="slds-spinner__dot-a"></div>
+                                            <div class="slds-spinner__dot-b"></div>
+                                        </div>
+                                    </div>
+                                </aura:if>
+                            </div>
+                        </aura:if>
+						<lightning:tabset selectedTabId="one">
+						<lightning:tab label="Comments" id="one">
+								<div class="slds-grid slds-gutters slds-border_bottom " style="margin-right:0.25rem;margin-left:0.25rem;">
+									<div class="slds-col slds-size_4-of-12" >
+										<h2 class="commentClass">Comments &nbsp;({!v.wrapIdea.commentsCount})</h2><br/>
+									</div>
+									<div class="slds-col slds-size_4-of-12" />
+									<div class="slds-col slds-size_4-of-12 " >
+										<aura:if isTrue="{!v.wrapIdea.commentsCount >0}">
+											<ui:inputSelect class="sortPicklist " aura:id="sort" label="Sort By" change="{!c.sortComments}" value="{!v.selectedValue}">
+												<option value="Newest First">Newest First </option>
+												<option value="Oldest First">Oldest First </option>
+											</ui:inputSelect>
+										</aura:if>
+									</div>
+								</div>
+								<aura:if isTrue="{!v.wrapIdea.commentsCount == 0}">
+									<div class="slds-align_absolute-center">
+										<h1 class="commentClass slds-p-around_small">{!$Label.c.No_Comments}</h1>
+									</div>
+								</aura:if>
+								<aura:if isTrue="{!v.ShowSortedNewComments}">
+								
+									<aura:iteration items="{!v.lstComments}" var="comment">
+										<div class="slds-grid slds-wrap slds-p-around_medium" >
+											<div class="slds-col slds-size_2-of-12 widthClass">
+												<span>
+													<!--
+													<lightning:avatar variant="circle" alternativeText="{!comment.CreatedBy.Name}"  class="slds-avatar slds-avatar_profile-image-medium" size="large" />
+													-->
+													<aura:if isTrue="{!comment.CreatedBy.SmallPhotoUrl}" >
+														<lightning:avatar variant="circle"  src="{!comment.CreatedBy.SmallPhotoUrl}"
+																		  alternativeText="{!comment.CreatedBy.Name}" size="medium"/>
+														<aura:set attribute="else">	
+															<lightning:avatar variant="circle" class="slds-avatar slds-avatar_profile-image-medium" 
+																			  alternativeText="{!comment.CreatedBy.Name}" size="medium"/>
+														</aura:set>
+													</aura:if>
+												</span>
+											</div>
+											<div class="slds-col slds-size_10-of-12 slds-p-left_x-small">
+												<span class ="slds-p-bottom_xx-small ">
+													<a><lightning:formattedRichText value="{!comment.CreatedBy.Name}" /></a><span> &#8208;</span><ui:outputDate value="{!comment.CreatedDate}" class="slds-p-left_xx-small"/>
+												</span>
+												<span>
+													<lightning:formattedRichText value="{!comment.CommentBody__c}" class="slds-has-flexi-truncate"/>
+												</span>
+											</div>
+										</div>
+									</aura:iteration>
+								</aura:if>
+							
+								<aura:if isTrue="{!v.ShowSortedOldComments}">						
+									<aura:iteration items="{!v.lstComments}" var="comment" indexVar="indexVar">
+										<div class="slds-grid slds-wrap slds-p-around_medium" >
+											<div class="slds-col slds-size_2-of-12 widthClass">
+												<span>
+													<!--
+													<lightning:avatar variant="circle" alternativeText="{!comment.CreatedBy.Name}"  class="slds-avatar slds-avatar_profile-image-medium" size="large" />
+													-->
+													<aura:if isTrue="{!comment.CreatedBy.SmallPhotoUrl}" >
+														<lightning:avatar variant="circle"  src="{!comment.CreatedBy.SmallPhotoUrl}"
+																		  alternativeText="{!comment.CreatedBy.Name}" size="medium"/>
+														<aura:set attribute="else">	
+															<lightning:avatar variant="circle" class="slds-avatar slds-avatar_profile-image-medium" 
+																			  alternativeText="{!comment.CreatedBy.Name}" size="medium"/>
+														</aura:set>
+													</aura:if>
+												</span>
+											</div>
+											<div class="slds-col slds-size_10-of-12 slds-p-left_x-small">
+												<span class ="slds-p-bottom_xx-small">
+													<a><lightning:formattedRichText value="{!comment.CreatedBy.Name}" /></a><span> &#8208;</span><ui:outputDate value="{!comment.CreatedDate}" class="slds-p-left_xx-small" />
+												</span>
+												<span>
+													<lightning:formattedRichText value="{!comment.CommentBody__c}" class="slds-has-flexi-truncate"/>
+												</span>
+											</div>
+										</div>
+									</aura:iteration>
+								</aura:if>
+								</lightning:tab>
+								<lightning:tab label="Files" id="two">
+                                    <c:attachmentUploadComp></c:attachmentUploadComp>
+                                    <c:attachmentIdeaComp></c:attachmentIdeaComp>
+								</lightning:tab>
+						</lightning:tabset>			
+                        <br/>
+                    </lightning:card>
+                </lightning:layoutItem>
+                
+                <lightning:layoutItem padding="around-small" size="2">
+                    <div class="slds-p-top_x-large">
+                        <div class="slds-theme_default" >
+                            <div class="slds-grid slds-wrap slds-p-around_medium" >
+                                <span class="slds-align_absolute-center">
+                                    <div  class="slds-col slds-size_1-of-1 widthClass">
+                                        <!--
+										<lightning:avatar variant="circle" alternativeText="{!v.wrapIdea.objIdeaRecord.CreatedBy.Name}" class="slds-avatar slds-avatar_profile-image-medium"  size="large" />        
+                                        -->
+                                        <aura:if isTrue="{!v.wrapIdea.objIdeaRecord.CreatedBy.SmallPhotoUrl}" >
+                                            <lightning:avatar variant="circle"  src="{!v.wrapIdea.objIdeaRecord.CreatedBy.SmallPhotoUrl}"
+                                                              alternativeText="{!v.wrapIdea.objIdeaRecord.CreatedBy.Name}" size="medium"/>
+                                            <aura:set attribute="else">	
+                                                <lightning:avatar variant="circle" class="slds-avatar slds-avatar_profile-image-medium" 
+                                                                  alternativeText="{!v.wrapIdea.objIdeaRecord.CreatedBy.Name}" size="medium"/>
+                                            </aura:set>
+                                            
+                                        </aura:if>
+                                    </div>
+                                    <div class="slds-col slds-wrap slds-size_1-of-1 slds-p-left_medium">
+                                        <span class="slds-p-left_x-large "> <a><lightning:formattedText value="{!v.wrapIdea.objIdeaRecord.CreatedBy.Name}"/></a></span>
+                                        <div class="slds-p-left_x-large "><ui:outputDate value="{!v.wrapIdea.objIdeaRecord.CreatedDate}" class="slds-p-left_xx-small"/></div>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="slds-grid slds-wrap slds-border_bottom " style="margin-right:2.25rem;margin-left:2.25rem;"/>
+                            <aura:if isTrue="{!v.wrapIdea.objIdeaRecord.Status__c}" >
+                                <div class="slds-p-top_medium slds-align_absolute-center"> 
+                                    <!--
+									<span class="slds-p-top_x-small slds-p-bottom_x-small slds-p-left_medium slds-p-right_medium slds-badge slds-text-title_caps "><lightning:formattedText value="{!v.wrapIdea.objIdeaRecord.Status__c}"/></span>
+									-->
+                                    <span class="slds-p-horizontal_small slds-p-vertical_x-small slds-badge slds-text-title_caps "><lightning:formattedText value="{!v.wrapIdea.objIdeaRecord.Status__c}"/></span>
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{!v.ShowStatusClosed}" >
+                                <div class="slds-p-top_medium slds-align_absolute-center"> 
+                                    <span class="slds-p-top_xxx-small slds-badge slds-text-title_caps "><lightning:formattedText value="{!v.idea.Status__c}"/></span>
+                                </div>
+                            </aura:if>
+                            <!--  <aura:if isTrue="{!and(v.wrapIdea.objIdeaRecord.Upvote_Sum__c,v.wrapIdea.objIdeaRecord.DownVote_Sum__c)}" >-->
+                            <div class="slds-p-top_medium slds-align_absolute-center"> 
+                                <div class="slds-p-top_medium slds-align_absolute-center"> <a href="javascript:void(0);">{!v.wrapIdea.objIdeaRecord.Upvote_Sum__c} Upvotes1 </a></div>
+                                <div class="slds-p-top_medium slds-align_absolute-center"><a href="javascript:void(0);">{!v.wrapIdea.objIdeaRecord.DownVote_Sum__c} Downvotes </a></div>
+                            </div>
+                            <!--</aura:if>-->
+                            <br/>
+            <lightning:layoutItem>
+                <!-- <c:attachmentUploadComp/> -->
+                    </lightning:layoutItem>
+                        </div>
+                    </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="2"/>
+            </lightning:layout>
+        </div>
+        <aura:set attribute="else">
+            <div aura:id="spinnerId" class="slds-spinner_container">
+                <div class="slds-spinner--brand  slds-spinner slds-spinner--small slds-is-relative"  aria-hidden="false" role="alert">
+                    <span class="slds-assistive-text">Loading...</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </aura:set>
+    </aura:if>
+    
+</aura:component>

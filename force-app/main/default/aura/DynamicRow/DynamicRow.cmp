@@ -1,0 +1,49 @@
+<aura:component controller="CaseController" Implements="flexipage:availableForRecordHome,force:hasRecordId">
+  <!--Init handler which is call doInit js function on component Load-->  
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+  
+ <!--Event handler for Add and Delete Row Event which is fire from Child Component-->    
+    <aura:handler name="DeleteRowEvt" event="c:DeleteRowEvt" action="{!c.removeDeletedRow}"/>
+    <aura:handler name="AddRowEvt" event="c:AddNewRowEvt" action="{!c.addNewRow}"/>
+ 
+ <!--Aura Attribute for store Contact Object List as Array-->    
+    <aura:attribute name="caseList" type="Case_Line_Item__c[]" /> 
+ 
+ <!--Header Part-->        
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="form-element-01">Add Case Items</label>
+    </div>
+ <!--Table Part-->           
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col">
+                    <div class="slds-truncate">S.No</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Licence Type">Licence Type</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="No. of Licence">No. of Licence</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Action">Effective Date</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Action">Action</div>
+                </th>
+            </tr>
+        </thead>   
+        <tbody>
+           <!--Iterate the child Component for display Table rows 
+               with pass the List Item Index for track the Every child Component 
+               and pass each List Contact Instance  -->        
+            <aura:iteration items="{!v.caseList}" var="item" indexVar="index">
+                
+                <c:DynamicRowItem dataObj="{!item}" rowIndex="{!index}" />
+            </aura:iteration>
+        </tbody>
+    </table>
+    <br/>
+    
+</aura:component>

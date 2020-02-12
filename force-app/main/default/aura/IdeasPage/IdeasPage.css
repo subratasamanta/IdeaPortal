@@ -1,0 +1,60 @@
+.THIS .selected{
+     /* color:rgb(6, 143, 199);*/
+    color:rgb(7,7,7);
+}
+
+.THIS .slds-badge{
+    background-color: rgb(224, 229, 238);
+}
+.THIS .widthClass{
+    padding-left:120px ;
+    margin-top: -55px ;
+}
+
+.THIS .classModal{
+    position: absolute;
+    height: auto;
+    width: 800px;
+    top: 41px;
+    left: 592px;
+    display: block;
+}
+.THIS .progressWidth{
+    width:50% !important;
+    background:#42547a;
+}
+.THIS.wizard{
+    background:#42547a;
+}
+.THIS .progressWidthSecond{
+    width:100% !important;
+    background:#42547a;
+}
+
+.THIS .buttonClassCancel{
+    float:left;
+}
+
+.THIS .sortPicklist{
+    width:fit-content;
+}
+
+.THIS .buttonPostIdea{
+    float : right;
+}
+.THIS .classAccord{
+    background-color:white;
+    width: 15.666667%;
+    margin-right: 35px;
+    height: fit-content;
+    border-radius: 0.65em;
+}
+
+.THIS .slds-accordion__list-item {
+    border-top: 0px solid rgb(212, 212, 212);
+}
+
+.THIS .overDiv{
+    overflow:hidden;
+    
+}

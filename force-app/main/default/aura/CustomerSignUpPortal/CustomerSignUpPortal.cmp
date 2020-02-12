@@ -1,0 +1,29 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <div class="slds-theme_shade" >
+        <div class="slds-align_absolute-center" style=" padding-top: 150px;">
+            <div class="slds-box slds-theme_default" style="height:600px; width:500px; ">  
+                <img class=" slds-m-around_x-large slds-align_absolute-center" src= "{!$Resource.TavantLogo}" style="width: 225px;"/>
+                <div class="form-group">
+                    <header class="sldsheader">
+                        <div class="sign-in-heading" style="font-size:30px; margin-left: 30px;"> Sign In </div>
+                    </header> 
+                    <lightning:input class="labelEmail" type="email" name="Email" required="true"  label="Email Address" />
+                    <lightning:input class="labelPass" type="password" label="Password" name="Password" required="true"  />
+                    <lightning:input class="labelFName" type="text" label="First Name" name="First Name" required="true"  />
+                    <lightning:input class="labelLName" type="text" label="Last Name" name="Last Name" required="true"  />
+                    <lightning:input class="labelCompany" type="text" label="Company" name="Company" required="true"  />
+                    <lightning:input class="labelRole" type="text" label="Role" name="Role" required="true"  /><br/>
+                    <br/>
+                    <lightning:button class="buttonSignUp" variant="Neutral" label="Create Account" title="SignUp" onclick="{!c.SignUp }" />
+                    <aura:if isTrue="{!v.boolModal}">
+                   <div class="slds-modal__content slds-p-around_medium " id="modal-content-id-1">
+                            <lightning:icon style="margin-left: 280px;" iconName="action:approval" alternativeText="Approved" />
+                            <h1 style="color: #33cc33;; font-size:2em;text-align: center;"> Customer Account Created succesfully.</h1>
+                        </div>
+                    </aura:if>
+                </div>
+            </div>  
+        </div>
+    </div>  
+    
+</aura:component>

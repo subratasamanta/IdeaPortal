@@ -1,0 +1,97 @@
+<apex:page standardController="Opportunity" tabStyle="Opportunity" extensions="UploadAttachmentController">
+
+
+
+ <apex:sectionHeader title="{!Opportunity.Name}" subtitle="Attach File"/>
+
+ 
+
+ <apex:form id="form_Upload">
+
+ <apex:pageBlock >
+
+
+
+ <apex:pageBlockButtons >
+
+   <apex:commandButton action="{!back}" value="Back to {!Opportunity.Name}"/>
+
+   <apex:commandButton action="{!back}" value="Cancel"/>
+
+ </apex:pageBlockButtons>
+
+ <apex:pageMessages />
+
+ 
+
+  <apex:pageBlockSection columns="1">
+
+  
+
+    <apex:pageBlockSectionItem >
+
+      <apex:outputLabel value="File" for="file_File"/>
+
+      <apex:inputFile id="file_File" value="{!fileBody}" filename="{!fileName}"/>
+
+    </apex:pageBlockSectionItem>
+
+  
+
+    <apex:pageBlockSectionItem >
+
+      <apex:outputLabel value="Type" for="type"/>
+
+      <apex:selectList value="{!selectedType}" size="1" id="type"> 
+
+        <apex:selectOption itemValue="SOW" itemLabel="SOW"/>
+
+        <apex:selectOption itemValue="QBR Notes" itemLabel="QBR Notes"/>
+
+        <apex:selectOption itemValue="Letter Order" itemLabel="Letter Order"/>
+
+      </apex:selectList>
+
+    </apex:pageBlockSectionItem>
+
+    
+
+
+
+    
+
+    <apex:pageBlockSectionItem >
+
+      <apex:outputLabel value="Description" for="description"/> 
+
+      <apex:inputTextarea id="description" value="{!description}" rows="4" cols="50"/>
+
+    </apex:pageBlockSectionItem>
+
+    
+
+    <apex:pageBlockSectionItem >
+
+      <apex:outputLabel value="" for="uploadBtn"/> 
+
+      <apex:commandButton id="uploadBtn" value="Attach File" action="{!processUpload}" />
+
+    </apex:pageBlockSectionItem>    
+
+    
+
+  </apex:pageBlockSection>
+
+ 
+
+ </apex:pageBlock>
+
+
+
+
+
+ </apex:form>
+
+
+
+</apex:page>

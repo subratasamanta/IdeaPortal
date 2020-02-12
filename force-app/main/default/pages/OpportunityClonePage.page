@@ -1,0 +1,125 @@
+<!--
+* Description: This visualforce page is used to clone opportunity records.
+* If certain conditions are met while cloning a record, a popup window will appear where the user will have to upload file attachment.
+*-------------------------------------------------------------------------------------------------------
+*  Author                          Date                               Project         
+*  Shiwangi Jha                    5/23/2018                          Tavant Internal Sales 
+*-------------------------------------------------------------------------------------------------------
+* -->
+<apex:page sidebar="false" standardController="Opportunity" extensions="OpportunityCloneExtension">
+    
+    <apex:form id="form">
+        
+        <apex:pageBlock title="Opportunity Edit" mode="Edit">
+            <apex:pageMessages id="showError" rendered="{!displayPopUp==false}"></apex:pageMessages>   
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}" id="savePage"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            
+            <!-- This code is for displaying a file upload popup window. -->
+            <apex:outputPanel id="popup">
+                <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+                <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopUp==true}">                
+                    <apex:pageBlock title="Upload Attachment">  
+                        <apex:pageMessages ></apex:pageMessages>
+                        
+                        <apex:pageBlockButtons location="bottom">
+                            <apex:commandButton action="{!upload}" value="Save"/>
+                            <apex:commandButton action="{!close}" value="Close"/>
+                        </apex:pageBlockButtons>
+                        
+                        <apex:pageBlockSection showHeader="false" columns="1" id="block1">
+                            <apex:outputLabel ><b>1. Select the SOW File</b></apex:outputLabel>
+                            <apex:outputLabel >Click "Choose File" button to find the file</apex:outputLabel>
+                            <apex:inputFile id="file1" value="{!attachment.body}" filename="{!attachment.name}" />
+                            <apex:outputLabel > Allowed file types: doc, docx, pdf </apex:outputLabel>
+                            <br/>
+                            <apex:outputLabel ><b>2. Select the Deal Sheet File</b></apex:outputLabel>
+                            <apex:outputLabel >Click "Choose File" button to find the file</apex:outputLabel>
+                            <apex:inputFile id="file2" value="{!newAttachment.body}" filename="{!newAttachment.name}"/>
+                            <apex:outputLabel > Allowed file types: xls, xlsx</apex:outputLabel>
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>                
+                </apex:outputPanel>
+            </apex:outputPanel> 
+            
+            <!-- This code displays the fields of Opportunity record. -->
+            <apex:pageBlockSection title="Opportunity Information" >
+                
+                <apex:inputField value="{!OpportunityCloned.AccountId}"/>
+                <apex:outputField value="{!OpportunityCloned.OwnerId}" rendered="{!OpportunityCloned.OwnerId != null}"/>
+                <apex:inputField value="{!OpportunityCloned.Name}"/>
+                
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="{!$ObjectType.Opportunity.Fields.StageName.Label}"></apex:outputText>
+                    <apex:actionRegion >                
+                        <apex:inputField value="{!OpportunityCloned.StageName}" id="stageId">
+                            <apex:actionSupport event="onchange" action="{!changeStageName}" rerender="probability,forecast,messages" />                                
+                        </apex:inputField>                    
+                    </apex:actionRegion>                    
+                </apex:pageBlockSectionItem>
+                
+                <apex:inputField value="{!OpportunityCloned.CloseDate}"/>
+                <apex:inputField value="{!OpportunityCloned.ForecastCategoryName}" id="forecast"/>
+                <apex:inputField value="{!OpportunityCloned.Close_Date_Change_Count__c}"/>                
+                <apex:inputField value="{!OpportunityCloned.Probability}" id="probability" required="false"/>
+                <apex:inputField value="{!OpportunityCloned.Amount}"/>
+                <apex:inputField value="{!OpportunityCloned.Gross_Margin__c}"/>
+                <apex:inputField value="{!OpportunityCloned.Description}"/>
+                <apex:inputField value="{!OpportunityCloned.Horizontal_Practice__c}"/>
+                <apex:inputField value="{!OpportunityCloned.SOW_Start_Date__c}"/>
+                <apex:inputField value="{!OpportunityCloned.Vertical_Practice2__c}"/>
+                <apex:inputField value="{!OpportunityCloned.SOW_End_Date__c}"/>
+                <apex:inputField value="{!OpportunityCloned.Product_Quota__c}"/> 
+                <apex:inputField value="{!OpportunityCloned.Customer_PO_Reference__c}"/>
+                <apex:inputField value="{!OpportunityCloned.Product_Name__c}"/>
+                <apex:inputField value="{!OpportunityCloned.Related_Opportunity__c}"/>
+                <apex:inputField value="{!OpportunityCloned.Product_Opportunity_Type__c}"/>
+                <apex:inputField value="{!OpportunityCloned.LeadSource}"/>
+                <apex:inputField value="{!OpportunityCloned.PBD__c}"/>
+                <apex:inputField value="{!OpportunityCloned.CampaignId}"/>
+                <apex:inputField value="{!OpportunityCloned.GDM__c}"/>
+                <apex:inputField value="{!OpportunityCloned.Staffing_Requirements__c}"/> 
+                <apex:inputField value="{!OpportunityCloned.CoSalesPerson__c}"/>
+                <apex:inputField value="{!OpportunityCloned.GDM_Comments__c}"/>
+                <apex:inputField value="{!OpportunityCloned.Staffing_Fulfilled__c}"/>
+                <apex:inputField value="{!OpportunityCloned.AP_Contact__c}"/>   
+                <apex:inputField value="{!OpportunityCloned.mh_Associated_Blue_Sheet__c}"/>
+                <apex:inputField value="{!OpportunityCloned.Partner__c}"/>
+            </apex:pageBlockSection> 
+        </apex:pageBlock>
+        
+    </apex:form>
+    
+    <style type="text/css">
+        
+        <!-- This code is for styling the file upload popup window when it is active on the screen. -->
+        .customPopup {
+        background-color: LightSkyBlue;
+        border-style: solid;
+        border-width: 0.5px;
+        left: 20%;
+        padding: 10px;
+        position: absolute;
+        width: 750px;        
+        top:25%;
+        z-index: 9999;
+        }
+        
+        <!-- This code is for styling the background when the file upload popup window is active on the screen. -->
+        .popupBackground{
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+        }
+    </style>
+</apex:page>

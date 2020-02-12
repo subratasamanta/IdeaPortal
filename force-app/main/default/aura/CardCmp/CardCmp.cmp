@@ -1,0 +1,64 @@
+<aura:component  controller="IdeaController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="wrapPaginationList" type="IdeaController.WrapIdeasWithComments[]"/>
+    <aura:attribute name="currentPageNumber" type="integer" default="1"/>
+    <aura:attribute name="TotalPages" type="integer" default="0"/>
+    <aura:attribute name="TotalRecords" type="integer" default="0"/>
+    <aura:attribute name="RecordStart" type="integer" default="0"/>
+    <aura:attribute name="RecordEnd" type="integer" default="0"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"/>
+    <aura:attribute name="wrapIdea" type="IdeaController.WrapIdeasWithComments[]"/>   
+    <aura:attribute name="isdisplayed" type="Boolean" default="false"/>
+    <aura:attribute name="isShowAlert" type="Boolean" default="false" />
+    <aura:attribute name="isNoIdeas" type="Boolean" default="false" />
+    <aura:attribute name="isAllIdeas" type="Boolean" default="true" />
+    <aura:attribute name='IdeaDetails' Type='Idea__c'  default="{'sobjectType': 'Idea__c',   'Name': '',   'Idea_Description__c': ' ',
+                                                                'Ideas__c':'', 'SubIdeas__c':'',  'Status__c':'Submitted' }"/>    
+    <aura:attribute name='Comments' Type='Comment__c'  default="{'sobjectType': 'Comment__c','CommentBody__c': '', 
+                                                                'UpVotes__c': ' ','Idea__c':''      }"/>    
+    
+    <aura:attribute name="countIdea" type="Integer"  />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:layoutItem size="12" class="ideaList">
+        <aura:if isTrue="{!v.isAllIdeas}">
+            <aura:iteration items="{!v.wrapPaginationList}" var="idea" indexVar="index">
+                <lightning:card title="{!idea.objIdeaRecord.Name}" >
+                    <aura:set attribute="title">
+                        <a onclick="{!c.openDetailPage}" style="color:#556a8c;" class="slds-text-heading_small" id="{!index}"> {!idea.objIdeaRecord.Name}  </a>
+                    </aura:set>
+                    <span class="slds-p-around_small">
+                        <div class="slds-p-horizontal_small">
+                            <aura:if isTrue="{!idea.objIdeaRecord.Idea_Description__c!=null}">
+                                <lightning:formattedRichText value="{!idea.objIdeaRecord.Idea_Description__c}" class="slds-has-flexi-truncate" />   
+                                <aura:set attribute="else">
+                                    &nbsp;No Description
+                                </aura:set>
+                            </aura:if>
+                            <div tabindex="{!index}">
+                                <a href="javascript:void(0);" id="{!index}" onclick="{!c.openComments}">{!idea.commentsCount} Comments</a>
+                                Posted on <ui:outputDate value="{!idea.objIdeaRecord.CreatedDate}"/>
+                            </div>
+                        </div>
+                    </span>
+                    <span class="slds-border_left">
+                        	<div>
+                            	<c:VoteCmp ideaRecordId="{!idea.objIdeaRecord.Id}" ideaRecord="{!idea.objIdeaRecord}" />
+                             </div>
+                        	<div>
+                            <aura:if isTrue="{!idea.objIdeaRecord.Status__c}" >
+                                <div class="slds-p-top_small slds-align_absolute-center">
+                                    <lightning:badge label="{!idea.objIdeaRecord.Status__c}" />
+                                    
+                                </div>
+                                <span >
+                                <p class="slds-badge slds-m-around--large slds-align_absolute-center"> <p class="width:20% fill:grey">{!idea.objIdeaRecord.Status__c}</p></p>
+                                </span>
+                            </aura:if>
+                                </div>
+                    </span>
+                </lightning:card>
+            </aura:iteration>
+        </aura:if>
+    </lightning:layoutItem>
+    
+</aura:component>

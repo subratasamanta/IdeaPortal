@@ -1,0 +1,2 @@
+<apex:page standardController="SEPG_Data_Form__c" recordSetVar="a" 
+action="{!URLFOR($Action.SEPG_Data_Form__c.List,$ObjectType.SEPG_Data_Form__c)}" />

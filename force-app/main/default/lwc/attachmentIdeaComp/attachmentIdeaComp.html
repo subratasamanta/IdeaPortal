@@ -1,0 +1,19 @@
+<template>
+    <!-- Datatable to show the related files of the record -->
+    <lightning-card title="Related Files" icon-name="standard:file">
+     <div style="width: auto;">
+            <template if:true={recordsFound}>
+                    <lightning-datatable 
+                            data={data}
+                            columns={columns}
+                            key-field="id"
+                            onrowaction={handleRowAction}
+                            hide-checkbox-column>
+                    </lightning-datatable>
+            </template>
+            <template if:false={recordsFound}>
+                No files found
+            </template>
+        </div>
+    </lightning-card>        
+</template>

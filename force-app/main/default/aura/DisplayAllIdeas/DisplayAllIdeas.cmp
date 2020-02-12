@@ -1,0 +1,61 @@
+<aura:component controller="IdeaController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="wrapPaginationList" type="IdeaController.WrapIdeasWithComments[]"/>
+    <aura:attribute name="wrapIdea" type="IdeaController.WrapIdeasWithComments[]"/>   
+    <aura:attribute name="currentPageNumber" type="integer" default="1"/>
+    <aura:attribute name="TotalPages" type="integer" default="0"/>
+    <aura:attribute name="TotalRecords" type="integer" default="0"/>
+    <aura:attribute name="RecordStart" type="integer" default="0"/>
+    <aura:attribute name="RecordEnd" type="integer" default="0"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:iteration items="{!v.wrapPaginationList}" var="idea" indexVar="index">
+        <lightning:card title="{!idea.objIdeaRecord.Name}" >
+            <aura:set attribute="title">
+                <a onclick="{!c.openDetailPage}" style="color:#556a8c;" class="slds-text-heading_small" id="{!index}"> {!idea.objIdeaRecord.Name}  </a>
+            </aura:set>
+            <div class="slds-grid slds-gutters slds-p-left_medium slds-wrap slds-gutters_medium" >
+                <div class="slds-col slds-size_6-of-12  slds-wrap" > 
+                    <aura:if isTrue="{!idea.objIdeaRecord.Idea_Description__c!=null}">
+                        <lightning:formattedRichText value="{!idea.objIdeaRecord.Idea_Description__c}" class="slds-has-flexi-truncate" />   
+                        <aura:set attribute="else">
+                            &nbsp;No Description
+                        </aura:set>
+                    </aura:if>
+                    <br/>
+                    <div tabindex="{!index}">
+                        <a href="javascript:void(0);" id="{!index}" onclick="{!c.openComments}">{!idea.commentsCount} Comments</a>
+                        Posted on <ui:outputDate value="{!idea.objIdeaRecord.CreatedDate}"/>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_4-of-12 slds-wrap" >
+                    <!--<div class="slds-grid slds-gutters slds-p-left_medium" >
+                        <div class="slds-col slds-size_7-of-12">-->
+                            <c:VoteComponent ideaRecordId="{!idea.objIdeaRecord.Id}" ideaRecord="{!idea.objIdeaRecord}" />
+                            <aura:if isTrue="{!idea.objIdeaRecord.Status__c}" >
+                                <div class="slds-p-top_small">
+                                    <lightning:badge label="{!idea.objIdeaRecord.Status__c}" />
+                                </div>
+                            </aura:if>
+                        </div>
+                        <div class="slds-col slds-size_2-of-12">
+                            <lightning:avatar variant="circle" src="{!idea.objIdeaRecord.CreatedBy.SmallPhotoUrl}" 
+                                              alternativeText="{!idea.objIdeaRecord.CreatedBy.Name}"/>
+                            <div class="slds-p-right_x-small"> <a><lightning:formattedText value="{!idea.objIdeaRecord.CreatedBy.Name}"/></a></div>
+                        </div>
+                   <!-- </div>
+                </div> -->
+                
+            </div>
+        </lightning:card>
+    </aura:iteration>
+    <!-- Pagination Starts here-->
+    <span class="slds-clearfix "> 
+        <div class="slds-float_right slds-m-around_medium">            
+            <lightning:button disabled="{!v.RecordStart == 1}" iconName="utility:chevronleft" iconPosition="left"  aura:id="prevPage" label="Prev" onclick="{!c.handlePrev}" /> 
+            <lightning:button disabled="{!v.RecordEnd >= v.TotalRecords}" aura:id="nextPage" iconName="utility:chevronright" iconPosition="right"  label="Next" onclick="{!c.handleNext}"/>
+        </div>
+        <div  style ="margin-top: 25px;" class="slds-page-title slds-m-top_x-medium">{!v.RecordStart} to {!((v.TotalRecords) >= (v.RecordEnd) ? (v.RecordEnd) : (v.TotalRecords))} of {!v.TotalRecords} | Page {!v.currentPageNumber}  of {!v.TotalPages} Pages</div>
+    </span> 
+    <!-- Pagination Ends here-->
+</aura:component>

@@ -1,0 +1,29 @@
+.THIS .classModal{
+    position: absolute;
+    height: auto;
+    width: 800px;
+    top: 41px;
+    left: 592px;
+    display: block;
+}
+.THIS .progressWidth{
+    width:50% !important;
+    background:#42547a;
+}
+.THIS.wizard{
+    background:#42547a;
+}
+.THIS.wizard:active{
+    background:#42547a;
+}
+.THIS .progressWidthSecond{
+    width:100% !important;
+    background:#42547a;
+}
+.THIS .buttonClassCancel{
+    float:left;
+}
+
+.THIS .sortPicklist{
+    width:fit-content;
+}

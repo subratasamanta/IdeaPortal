@@ -1,0 +1,191 @@
+<apex:page controller="ScorecardInstanceController">
+  <apex:pageMessages />
+  <apex:messages />
+<apex:form > 
+
+<apex:pageBlock title="Add Scorecard" rendered="true" id="upper">
+ <div><b><apex:actionStatus startText="calculating..." id="upperStatus" /></b></div>
+  <apex:pageBlockButtons location="both">
+   <!--<apex:commandButton action="{!calculatescores}" value="Calculate Metric Score" style="width:150px" reRender="lower" />-->
+    <apex:commandButton action="{!calculateweightage}" status="upperStatus" value="Calculate Scores" style="width:150px" reRender="upper" />    
+    <apex:commandButton action="{!save}" value="Save" style="width:100px" />
+     <apex:commandButton id="submit" action="{!submit}" value="Submit" style="width:100px" />
+     </apex:pageBlockButtons>  
+
+<apex:pageBlockSection columns="2">
+<apex:outputField id="sisc" value="{!scorecardinstancedetails.Scorecard__c}" />
+<apex:inputField id="sifc" value="{!scorecardinstancedetails.Frequency__c}"  style="display:none;visibility:hidden" label=""/>
+<apex:inputField id="siyc" value="{!scorecardinstancedetails.Year__c}" required="true"/>
+
+<apex:inputField id="sidfc" value="{!scorecardinstancedetails.Month__c}" required="true" ></apex:inputField>
+     
+
+<apex:inputField value="{!scorecardinstancedetails.Weighted__c}" label="{!'Weighted Overall Score '+scorecarddetails.Weighted_Score_1_Owner__c}"></apex:inputField>
+<apex:inputField value="{!scorecardinstancedetails.Weighted_2__c}" label="{!'Weighted Overall Score '+scorecarddetails.Weighted_Score_2_Owner__c}"></apex:inputField>
+<script>
+    document.getElementById("j_id0:j_id29:upper:j_id35:sisc").innerHTML="{!scorecarddetails.Name}";
+    document.getElementById("j_id0:j_id29:upper:j_id35:sifc").value="{!scorecarddetails.Frequency__c}";
+    document.getElementById("j_id0:j_id29:upper:j_id35:sifc").disabled=true;
+    today = new Date();thisyear = today.getFullYear();
+    document.getElementById("j_id0:j_id29:upper:j_id35:siyc").value=thisyear;
+</script>
+    <!--<apex:actionFunction name="check" action="{!getMonth}">
+        <apex:param name="getCurrentMonthName" value="" />
+    </apex:actionFunction>-->
+</apex:pageBlockSection>
+<div style="text-align:center;margin-bottom:10px;">
+<apex:commandButton style="width:300px" action="{!echoVal}" value="Fetch available data from departments" reRender="lower" status="myStatus">
+<apex:param name="getCurrentMonthName" value="December"/>
+</apex:commandButton>
+</div>
+<apex:pageBlock id="lower" rendered="true" >
+<div id="loading-curtain-div"/>
+  <div><b><apex:actionStatus startText="fetching data" id="myStatus" /></b></div>
+  <apex:pageBlockSection collapsible="true" title="Financial Records" columns="1">
+   <apex:pageBlockTable value="{!finances}" var="row">
+   
+   <apex:column headerValue="Metrics" style="text-decoration:none" width="200px">
+   <apex:outputField value="{!row.Metrics__c}"/></apex:column>
+   
+   <apex:column headerValue="Yearly Target" style="text-decoration:none" width="100px">
+   <apex:outputField value="{!row.Previous_Value__c}"/></apex:column>
+   
+   <apex:column headerValue="YTD Actual" width="100px">
+    <apex:inputField value="{!row.Current_Value__c}" style="height: 25px;width:100px" rendered="{!NOT(row.Grade__c=true)}"/>
+    <apex:inputField value="{!row.Current_Value_Grade__c}" style="height: 25px; width:100px" rendered="{!row.Grade__c=true}"/>
+   </apex:column>
+   
+   <apex:column headerValue="YTD Target" width="100px">
+   <apex:inputField value="{!row.Targets__c}"  style="height:25px;width:100px" rendered="{!NOT(row.Grade__c=true)}"/>
+   <apex:inputField value="{!row.Target_Grade_Value__c}"  style="height:25px;width:100px" rendered="{!row.Grade__c=true}"/>
+   </apex:column>
+    <apex:column headerValue="{!'Weightage '+scorecarddetails.Weighted_Score_1_Owner__c}" width="100px">
+   <apex:outputField value="{!row.Weighted_1__c}"  style="height:25px;width:100px"/>
+   </apex:column>
+    <apex:column headerValue="{!'Weightage '+scorecarddetails.Weighted_Score_2_Owner__c}" width="100px">
+   <apex:outputField value="{!row.Weighted_2__c}"  style="height:25px;width:100px"/>
+   </apex:column>
+       <apex:column headerValue="Score %" width="70px">
+   <apex:inputField value="{!row.Score__c}"  style="height:25px;width:70px"/>
+   </apex:column>   
+   <apex:column headerValue="Initiatives Current" width="250px">
+   <apex:inputField value="{!row.Initiatives__c}" style="width:250px;height:100px"/></apex:column>
+    
+   <apex:column headerValue="Initiatives Future" width="250px">
+   <apex:inputField value="{!row.Future_Initiatives__c}" style="width:250px;height:100px"/></apex:column>
+   
+   <apex:column headerValue="Review Comments" width="250px">
+   <apex:outputField value="{!row.Review_Comments__c}" style="width:250px;height: 100px"/></apex:column>
+    
+   </apex:pageBlockTable>
+  </apex:pageBlockSection>
+
+ <apex:pageBlockSection collapsible="true" title="Customer Records" columns="1">  
+ <apex:pageBlockTable value="{!customers}" var="row">
+ 
+   <apex:column headerValue="Metrics" style="text-decoration:none" width="200px">
+   <apex:outputField value="{!row.Metrics__c}"/></apex:column>
+      <apex:column headerValue="Yearly Target" style="text-decoration:none" width="100px">
+   <apex:outputField value="{!row.Previous_Value__c}"/></apex:column>
+   <apex:column headerValue="YTD Actual" width="100px">
+    <apex:inputField value="{!row.Current_Value__c}" style="height: 25px;width:100px" rendered="{!NOT(row.Grade__c=true)}"/>
+    <apex:inputField value="{!row.Current_Value_Grade__c}" style="height: 25px; width:100px" rendered="{!row.Grade__c=true}"/>
+   </apex:column>
+   
+   <apex:column headerValue="YTD Target" width="100px">
+   <apex:inputField value="{!row.Targets__c}"  style="height:25px;width:100px" rendered="{!NOT(row.Grade__c=true)}"/>
+   <apex:inputField value="{!row.Target_Grade_Value__c}"  style="height:25px;width:100px" rendered="{!row.Grade__c=true}"/>
+   </apex:column>
+   <apex:column headerValue="{!'Weightage '+scorecarddetails.Weighted_Score_1_Owner__c}" width="100px">
+   <apex:outputField value="{!row.Weighted_1__c}"  style="height:25px;width:100px"/>
+   </apex:column>
+    <apex:column headerValue="{!'Weightage '+scorecarddetails.Weighted_Score_2_Owner__c}" width="100px">
+   <apex:outputField value="{!row.Weighted_2__c}"  style="height:25px;width:100px"/>
+   </apex:column>
+       <apex:column headerValue="Score %" width="70px">
+   <apex:inputField value="{!row.Score__c}"  style="height:25px;width:70px"/>
+   </apex:column>   
+   <apex:column headerValue="Initiatives" width="250px">
+   <apex:inputField value="{!row.Initiatives__c}" style="width:250px;height:100px"/></apex:column>
+    
+   <apex:column headerValue="Initiatives Future" width="250px">
+   <apex:inputField value="{!row.Future_Initiatives__c}" style="width:250px;height:100px"/></apex:column>
+      <apex:column headerValue="Review Comments" width="250px">
+   <apex:outputField value="{!row.Review_Comments__c}" style="width:250px;height: 100px"/></apex:column>
+   
+  </apex:pageBlockTable>
+ </apex:pageBlockSection>
+
+<apex:pageBlockSection collapsible="true" title="Internal Process Records" columns="1"> 
+ <apex:pageBlockTable value="{!internals}" var="row">
+ 
+   <apex:column headerValue="Metrics" style="text-decoration:none" width="200px">
+   <apex:outputField value="{!row.Metrics__c}"/></apex:column>
+      <apex:column headerValue="Yearly Target" style="text-decoration:none" width="100px">
+   <apex:outputField value="{!row.Previous_Value__c}"/></apex:column>
+   <apex:column headerValue="YTD Actual" width="100px">
+    <apex:inputField value="{!row.Current_Value__c}" style="height: 25px;width:100px" rendered="{!NOT(row.Grade__c=true)}"/>
+    <apex:inputField value="{!row.Current_Value_Grade__c}" style="height: 25px; width:100px" rendered="{!row.Grade__c=true}"/>
+   </apex:column>
+   
+   <apex:column headerValue="YTD Target" width="100px">
+   <apex:inputField value="{!row.Targets__c}"  style="height:25px;width:100px" rendered="{!NOT(row.Grade__c=true)}"/>
+   <apex:inputField value="{!row.Target_Grade_Value__c}"  style="height:25px;width:100px" rendered="{!row.Grade__c=true}"/>
+   </apex:column>
+   <apex:column headerValue="{!'Weightage '+scorecarddetails.Weighted_Score_1_Owner__c}" width="100px">
+   <apex:outputField value="{!row.Weighted_1__c}"  style="height:25px;width:100px"/>
+   </apex:column>
+    <apex:column headerValue="{!'Weightage '+scorecarddetails.Weighted_Score_2_Owner__c}" width="100px">
+   <apex:outputField value="{!row.Weighted_2__c}"  style="height:25px;width:100px"/>
+   </apex:column>
+       <apex:column headerValue="Score %" width="70px">
+   <apex:inputField value="{!row.Score__c}"  style="height:25px;width:70px"/>
+   </apex:column>   
+   <apex:column headerValue="Initiatives" width="250px">
+   <apex:inputField value="{!row.Initiatives__c}" style="width:250px;height:100px"/></apex:column>
+    
+   <apex:column headerValue="Initiatives Future" width="250px">
+   <apex:inputField value="{!row.Future_Initiatives__c}" style="width:250px;height:100px"/></apex:column>
+         <apex:column headerValue="Review Comments" width="250px">
+   <apex:outputField value="{!row.Review_Comments__c}" style="width:250px;height: 100px"/></apex:column>
+  </apex:pageBlockTable>
+ </apex:pageBlockSection>
+
+<apex:pageBlockSection collapsible="true" title="Learning & Growth Records" columns="1">  
+ <apex:pageBlockTable value="{!learnings}" var="row">
+ 
+   <apex:column headerValue="Metrics" style="text-decoration:none" width="200px">
+   <apex:outputField value="{!row.Metrics__c}"/></apex:column>
+      <apex:column headerValue="Yearly Target" style="text-decoration:none" width="100px">
+   <apex:outputField value="{!row.Previous_Value__c}"/></apex:column>
+   <apex:column headerValue="YTD Actual" width="100px">
+    <apex:inputField value="{!row.Current_Value__c}" style="height: 25px;width:100px" rendered="{!NOT(row.Grade__c=true)}"/>
+    <apex:inputField value="{!row.Current_Value_Grade__c}" style="height: 25px; width:100px" rendered="{!row.Grade__c=true}"/>
+   </apex:column>
+   
+   <apex:column headerValue="YTD Target" width="100px">
+   <apex:inputField value="{!row.Targets__c}"  style="height:25px;width:100px" rendered="{!NOT(row.Grade__c=true)}"/>
+   <apex:inputField value="{!row.Target_Grade_Value__c}"  style="height:25px;width:100px" rendered="{!row.Grade__c=true}"/>
+   </apex:column>
+   <apex:column headerValue="{!'Weightage '+scorecarddetails.Weighted_Score_1_Owner__c}" width="100px">
+   <apex:outputField value="{!row.Weighted_1__c}"  style="height:25px;width:100px"/>
+   </apex:column>
+    <apex:column headerValue="{!'Weightage '+scorecarddetails.Weighted_Score_2_Owner__c}" width="100px">
+   <apex:outputField value="{!row.Weighted_2__c}"  style="height:25px;width:100px"/>
+   </apex:column>
+       <apex:column headerValue="Score %" width="70px">
+   <apex:inputField value="{!row.Score__c}"  style="height:25px;width:70px"/>
+   </apex:column>   
+   <apex:column headerValue="Initiatives" width="250px">
+   <apex:inputField value="{!row.Initiatives__c}" style="width:250px;height:100px"/></apex:column>
+    
+   <apex:column headerValue="Initiatives Future" width="250px">
+   <apex:inputField value="{!row.Future_Initiatives__c}" style="width:250px;height:100px"/></apex:column>
+         <apex:column headerValue="Review Comments" width="250px">
+   <apex:outputField value="{!row.Review_Comments__c}" style="width:250px;height: 100px"/></apex:column>
+  </apex:pageBlockTable>
+ </apex:pageBlockSection>
+</apex:pageBlock>
+ </apex:pageBlock>  
+</apex:form> 
+</apex:page>

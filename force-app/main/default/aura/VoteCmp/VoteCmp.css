@@ -1,0 +1,35 @@
+.THIS .upvote-green {
+   fill:rgb(0,128,0);
+}
+.THIS .downvote-red {
+   fill:rgb(220,20,60);
+}
+.THIS .downvoteFocus{
+    
+}
+.THIS .upvoteFocus:hover {
+  background-color: rgb(0,128,0);
+    color: white; 
+}
+.THIS.downvoteFocus:hover {
+  background-color:rgb(220,20,60);  
+  color:white;
+}
+.THIS .downvoteFocus svg{
+    width : 30px;
+}
+.THIS .voted_Gr svg{
+    width: 50px;
+    fill : green ;
+    align-items: center;
+}
+.THIS .voted_Red svg{
+    width:50px;
+    fill : red;
+    align-items: center;
+}
+.THIS .vote_dis svg{
+    width:50px;
+    fill : grey;
+    align-items: center;
+}
